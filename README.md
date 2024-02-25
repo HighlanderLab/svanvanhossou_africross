@@ -18,7 +18,7 @@ In this script, we simulated
   ##### Code
     CreateLocal&ExoticBreeds.R
   ##### Description 
-In this script, we simulated pure breeding over 20 generations in the local and exotic breeds separately.
+In this script, we simulated pure breeding over 20 generations in the local and exotic breeds separately to generate trait-specific linkage-disequilibrium in each breed
 
 We assumed 
 - phenotypic selection targeting (lower) tick count for the local breed
