@@ -22,7 +22,9 @@ In this script, we simulated pure breeding over 20 generations in the local and 
 
 We assumed 
 - phenotypic selection targeting (lower) tick count for the local breed
-- genomic selection targeting (higher) body weight for the exotic breed. 
+- genomic selection targeting (higher) body weight for the exotic breed.
+
+The Fst value between the two breeds at generation 20 is approximately equal to 0.3, which is in accordance with the genetic distance between African taurine and Asian indicine as reported by Kim et al., 2020.
 
 ## Custom functions
    ##### Code
