@@ -18,7 +18,11 @@ In this script, we simulated
   ##### Code
     CreateLocal&ExoticBreeds.R
   ##### Description 
-This script is used to simulate 160 smallholder cattle herds with the local breeds evenly distributed in eight regions (i.e., 20 herds/regions).
+In this script, we simulated pure breeding over 20 generations in the local and exotic breeds separately.
+
+We assumed 
+- phenotypic selection targeting (lower) tick count for the local breed
+- genomic selection targeting (higher) body weight for the exotic breed. 
 
 ## Custom functions
    ##### Code
