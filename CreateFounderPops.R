@@ -20,12 +20,12 @@ AdditVar <- PhenoVar*h2
  
  #Trait correlations
 CorA <-0.2  #genetic correlation between BodyWeight and TickCount in the same breed
-CorB<- 0.6  #genetic correlation between the same trait (e.g. BodyWeight) in the two breeds
+CorE<- 0.6  #genetic correlation between the same trait (e.g. BodyWeight) in the two breeds (as environmental correlation)
 
-TraitCor <- matrix(c(1, CorA, CorB, CorA/2,
-                     CorA, 1, CorA/2, CorB,
-                     CorB, CorA/2, 1, CorA,
-                     CorA/2, CorB, CorA, 1
+TraitCor <- matrix(c(1, CorA, CorE, CorA/2,
+                     CorA, 1, CorA/2, CorE,
+                     CorE, CorA/2, 1, CorA,
+                     CorA/2, CorE, CorA, 1
                      ),
                     nrow = 4, ncol = 4)
 
