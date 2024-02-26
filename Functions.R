@@ -55,3 +55,11 @@ recordSummary <- function(data = NULL, pop, year = NA) {
   }
   return(ret)
 }
+
+CalcMeanBV <- function(pop){
+  BV <-  as.data.frame(bv(pop))
+  BV$Gen <- unlist(pop@misc)
+  MeanBV <- aggregate(BV[, 1:4], list(BV$Gen), mean)
+  colnames(MeanBV)[1] <- "Generation"
+  return(MeanBV)
+}
