@@ -32,25 +32,28 @@ RefLocalPop <- LocalFounders
  # From generation 5, 10.000 females are selected within animal from the last 5 generations (cows are used for max.5 generations)
 
 for (Gen in 1:20){
-  candidates = randCross2(females = LocalCows, males = LocalBulls, nCrosses = nInd(LocalCows))
-  candidates <- setPheno (candidates, h2=  h2)
-  candidates = setMisc(x = candidates, node = "yearOfBirth", value = Gen)
-  Summary_LocalBreed <- recordSummary(data = Summary_LocalBreed, pop = candidates, year = Gen)
+  Offsprings = randCross2(females = LocalCows, males = LocalBulls, nCrosses = nInd(LocalCows))
+  Offsprings <- setPheno (Offsprings, h2=  h2)
+  Offsprings = setMisc(x = Offsprings, node = "yearOfBirth", value = Gen)
+  Summary_LocalBreed <- recordSummary(data = Summary_LocalBreed, pop = Offsprings, year = Gen)
   
-  RefLocalPop <- c(RefLocalPop, candidates)
-  RefLocalPop <- RefLocalPop[RefLocalPop@misc>= Gen - 4] #Consider only the last 5 generations
+  RefLocalPop <- c(RefLocalPop, Offsprings)
+  Candidates <- RefLocalPop[RefLocalPop@misc>= Gen - 4] #Consider only the last 5 generations for animal selections
   
-  LocalBulls <- selectInd(RefLocalPop[RefLocalPop@misc>= Gen - 1],  #only bulls from the last two generations are selected
+  LocalBulls <- selectInd(Candidates[Candidates@misc>= Gen - 1],  #only bulls from the last two generations are selected
                           nInd=100, trait = "TickCount_local", use = "pheno", sex = "M", selectTop = F)
  
   if (Gen <= 4) { #for the first 4 generations
-    LocalCows <- RefLocalPop[RefLocalPop@sex=="F"]  #all females are considered at this stage
+    LocalCows <- Candidates[Candidates@sex=="F"]  #all females are considered at this stage
   } else {
-    LocalCows <- selectInd(RefLocalPop, nInd=10000, trait = "TickCount_local", use = "pheno", sex = "F", selectTop = F)
+    LocalCows <- selectInd(Candidates, nInd=10000, trait = "TickCount_local", use = "pheno", sex = "F", selectTop = F)
   }
 }
 #save local population at Generation 20
-LocalBreed20 <- candidates
+LocalBreed20 <- Offsprings
+
+#Calculate average breeding values for the local breed considering the simulated 20 generations
+MeanBV_Local <- CalcMeanBV(RefLocalPop)
 
 
 
@@ -87,26 +90,29 @@ RefExoticPop <- ExoticFounders
  # 2.000 cows are selected of cows within animals from the last 5 generations (cows are used for max. 5 generations)
 
 for (Gen in 1:20){
-  candidates = randCross2(females = ExoticCows, males = ExoticBulls, nCrosses = nInd(ExoticCows))
-  candidates <- setPheno (candidates, h2=  h2)
-  candidates = setMisc(x = candidates, node = "yearOfBirth", value = Gen)
-  Summary_ExoticBreed <- recordSummary(data = Summary_ExoticBreed, pop = candidates, year = Gen)
+  Offsprings = randCross2(females = ExoticCows, males = ExoticBulls, nCrosses = nInd(ExoticCows))
+  Offsprings <- setPheno (Offsprings, h2=  h2)
+  Offsprings = setMisc(x = Offsprings, node = "yearOfBirth", value = Gen)
+  Summary_ExoticBreed <- recordSummary(data = Summary_ExoticBreed, pop = Offsprings, year = Gen)
 
-  RefExoticPop <- c(RefExoticPop, candidates)
-  RefExoticPop <- RefExoticPop[RefExoticPop@misc>= Gen - 4] 
+  RefExoticPop <- c(RefExoticPop, Offsprings)
+  Candidates <- RefExoticPop[RefExoticPop@misc>= Gen - 4] 
   
   ## Estimate EBV for the reference population (the last 5 generations)
-  ans = RRBLUP(RefExoticPop, traits = "BodyWeight_exotic")
-  RefExoticPop <- setEBV(RefExoticPop, ans)
+  ans = RRBLUP(Candidates, traits = "BodyWeight_exotic")
+  Candidates <- setEBV(Candidates, ans)
   
-  ExoticBulls <- selectInd(RefExoticPop[RefExoticPop@misc>= Gen - 1],  #only bulls from the last two generations are selected
+  ExoticBulls <- selectInd(Candidates[Candidates@misc>= Gen - 1],  #only bulls from the last two generations are selected
                           nInd= 50, trait = 1, use = "ebv", sex = "M")
-  ExoticCows <- selectInd(RefExoticPop, nInd=2000, trait = 1, use = "ebv", sex = "F", selectTop = F)
+  ExoticCows <- selectInd(Candidates, nInd=2000, trait = 1, use = "ebv", sex = "F", selectTop = F)
   
 }
 
 ## Save exotic populations at Generation 20
-ExoticBreed20 <- candidates
+ExoticBreed20 <- Offsprings
+
+#Calculate average breeding values for the exotic breed considering the simulated 20 generations
+MeanBV_Exotic <- CalcMeanBV(RefExoticPop)
 
 
 ###----- Check Fst between local and exotic populations at Generation 20
