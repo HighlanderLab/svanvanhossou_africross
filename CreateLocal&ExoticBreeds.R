@@ -1,6 +1,7 @@
 ###---------------------------------------------------------------------------------
 #                          Pure breeding over 20 generations 
 ###---------------------------------------------------------------------------------
+Strategy <- "PureBreeding"
 
 ###----- Local breeds  -----
 
@@ -54,7 +55,7 @@ LocalBreed20 <- Offsprings
 
 #Calculate average breeding values for the local breed considering the simulated 20 generations
 MeanBV_Local <- CalcMeanBV(RefLocalPop)
-
+MeanDD_Local <- CalcMeanDD(RefLocalPop)
 
 
 ###----- Exotic breeds -----
@@ -104,18 +105,29 @@ for (Gen in 1:20){
   
   ExoticBulls <- selectInd(Candidates[Candidates@misc>= Gen - 1],  #only bulls from the last two generations are selected
                           nInd= 50, trait = 1, use = "ebv", sex = "M")
-  ExoticCows <- selectInd(Candidates, nInd=2000, trait = 1, use = "ebv", sex = "F", selectTop = F)
+  ExoticCows <- selectInd(Candidates, nInd=2000, trait = 1, use = "ebv", sex = "F")
   
 }
 
+
 ## Save exotic populations at Generation 20
 ExoticBreed20 <- Offsprings
+ExoticCandidates20 <- Candidates[Candidates@misc== 20]
 
 #Calculate average breeding values for the exotic breed considering the simulated 20 generations
 MeanBV_Exotic <- CalcMeanBV(RefExoticPop)
-
+MeanDD_Exotic <- CalcMeanDD(RefExoticPop)
 
 ###----- Check Fst between local and exotic populations at Generation 20
 Fst$Fst20 <- calcFst(LocalBreed20, ExoticBreed20, c(LocalBreed20, ExoticBreed20)) 
 
-
+### -----Export phenotypic values, breeding values, dominance deviations and
+  #      population parameters for pure generations  ----
+ExportData <- c("Summary_LocalBreed", "MeanBV_Local", "MeanDD_Local",
+                "Summary_ExoticBreed", "MeanBV_Exotic","MeanDD_Exotic", 
+                "Fst", "HetFounders", "HetLocalFounders")
+for (i in ExportData) {
+  dat <- get(i)
+  write.table(dat, file = paste0(cwd,"/","Results/",i, "_", Strategy, ".txt" ),
+              append =T, row.names = F, col.names = F )
+}
