@@ -13,11 +13,12 @@ nSplit = 20000
             #c(BodyWeight_local, TickCount_local, BodyWeight_exotic, TickCount_exotic)
 
  #Parameters to simulate additive effects
-h2 <- c(0.3, 0.1, 0.3, 0.1)       
-PhenoMean <- c(325, 0.5, 450, 1.5)
-PhenoVar <- c(1300, 0.1, 625, 0.2)
-AdditVar <- PhenoVar*h2 
- 
+h2 <- c(0.4, 0.145, 0.4, 0.145)
+PhenoMean <- c(325, 1.0, 450, 1.5)
+PhenoVar <- c(1300, 0.2, 625, 0.2)
+AdditVar <- PhenoVar*(h2) 
+
+
  #Trait correlations
 CorA <-0.2  #genetic correlation between BodyWeight and TickCount in the same breed
 CorE<- 0.6  #genetic correlation between the same trait (e.g. BodyWeight) in the two breeds (as environmental correlation)
@@ -32,9 +33,8 @@ TraitCor <- matrix(c(1, CorA, CorE, CorA/2,
 ##Parameters to simulate dominance degree (effects) 
  #the expected proportion of dominance variance (VD) to phenotype variance (VP) is: 
  #0.1 for Body weight (Bolormaa et al., 2015) and 0.04 for Tickcount (Schneider et al., 2023)
-DomMean <- c(0.5, 0.8, 0.5, 0.8)  
-DomVar  <- c(0.4,0.2, 0.4, 0.2)
-
+DomMean <- c(0.2, -0.20, 0.2, -0.20) 
+DomVar  <- c(1, 1.2, 1, 1.2)
 
 ###---------------------------------------------------------------------------------
 #               Simulation of cattle genome & founder populations 
