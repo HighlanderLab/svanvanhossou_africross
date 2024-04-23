@@ -11,7 +11,8 @@ In this script, we simulated
 - a population split 20.000 generations ago (100.000 years as between Taurine and Indicine cattle)
 - all the traits are controlled by the same QTL (correlated QTL effects)
 - the same heritability in the two breeds but different phenotypic mean and variance in the two breeds, leading to 2 x 2 simulated traits
-- we tested different genetic correlations between body weight and  tick count (0, -0.4, -0.2, 0.2, 0.4) and GxE (0.6, 0.8, 0.4)
+- different genetic correlations between body weight and  tick count (0, -0.4, -0.2, 0.2, 0.4) 
+- GxE effects simulated as genetic correlation between (the same trait in) the breeds, i.e, between local and exotic environment. We tested different values : 0.6, 0.8, 0.4
 
 ## Simulation of a local and exotic breed 
   ##### Code
