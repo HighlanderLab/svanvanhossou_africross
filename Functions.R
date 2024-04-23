@@ -51,10 +51,18 @@ recordSummary <- function(data = NULL, pop, year = NA) {
                        VarA_TCl     = varA(pop)["TickCount_local","TickCount_local"],
                        VarA_BWe      = varA(pop)["BodyWeight_exotic","BodyWeight_exotic"],
                        VarA_TCe      = varA(pop)["TickCount_exotic","TickCount_exotic"] ,
-                       h2_BWl      = varA(pop)["BodyWeight_local","BodyWeight_local"]/varP(pop)["BodyWeight_local","BodyWeight_local"],
-                       h2_TCl     = varA(pop)["TickCount_local","TickCount_local"]/varP(pop)["TickCount_local","TickCount_local"],
-                       h2_BWe      = varA(pop)["BodyWeight_exotic","BodyWeight_exotic"]/varP(pop)["BodyWeight_exotic","BodyWeight_exotic"],
-                       h2_TCe      = varA(pop)["TickCount_exotic","TickCount_exotic"]/varP(pop)["TickCount_exotic","TickCount_exotic"]
+                       varD_BWl      = varD(pop)["BodyWeight_local","BodyWeight_local"],
+                       varD_TCl     = varD(pop)["TickCount_local","TickCount_local"],
+                       varD_BWe      = varD(pop)["BodyWeight_exotic","BodyWeight_exotic"],
+                       varD_TCe      = varD(pop)["TickCount_exotic","TickCount_exotic"] ,
+                       Addh2_BWl      = varA(pop)["BodyWeight_local","BodyWeight_local"]/varP(pop)["BodyWeight_local","BodyWeight_local"],
+                       Addh2_TCl     = varA(pop)["TickCount_local","TickCount_local"]/varP(pop)["TickCount_local","TickCount_local"],
+                       Addh2_BWe      = varA(pop)["BodyWeight_exotic","BodyWeight_exotic"]/varP(pop)["BodyWeight_exotic","BodyWeight_exotic"],
+                       Addh2_TCe      = varA(pop)["TickCount_exotic","TickCount_exotic"]/varP(pop)["TickCount_exotic","TickCount_exotic"],
+                       Domh2_BWl      = varD(pop)["BodyWeight_local","BodyWeight_local"]/varP(pop)["BodyWeight_local","BodyWeight_local"],
+                       Domh2_TCl     = varD(pop)["TickCount_local","TickCount_local"]/varP(pop)["TickCount_local","TickCount_local"],
+                       Domh2_BWe      = varD(pop)["BodyWeight_exotic","BodyWeight_exotic"]/varP(pop)["BodyWeight_exotic","BodyWeight_exotic"],
+                       Domh2_TCe      = varD(pop)["TickCount_exotic","TickCount_exotic"]/varP(pop)["TickCount_exotic","TickCount_exotic"]
   )
   # Manage first instance of calling this function, when data is NULL
   if (is.null(data)) {
@@ -70,6 +78,7 @@ CalcMeanBV <- function(pop){
   BV$Gen <- unlist(pop@misc)
   MeanBV <- aggregate(BV[, 1:4], list(BV$Gen), mean)
   colnames(MeanBV)[1] <- "Generation"
+  MeanBV$Strategy <- Strategy
   return(MeanBV)
 }
 
@@ -78,6 +87,7 @@ CalcMeanDD <- function(pop){
   DD$Gen <- unlist(pop@misc)
   MeanDD <- aggregate(DD[, 1:4], list(DD$Gen), mean)
   colnames(MeanDD)[1] <- "Generation"
+  MeanDD$Strategy <- Strategy
   return(MeanDD)
 }
 
@@ -132,9 +142,6 @@ AssignCow_v <- function(pop, nVil){
 
 recordSelInt <- function(data = NULL, pops, pop, Strategy= NA) {
   popData = data.frame(Generation   = Gen,
-                       #GEVariance   = varGE,
-                       #AdditiveCor  = corA,
-                       #Iteration    = Iter,
                        Strategy     = Strategy,
                        SelInt1        = (meanP(pops)["BodyWeight_local"] - meanP(pop)["BodyWeight_local"])/sqrt(varP(pop)["BodyWeight_local","BodyWeight_local"]), 
                        SelInt2        = (meanP(pops)["TickCount_local"] - meanP(pop)["TickCount_local"])/sqrt(varP(pop)["TickCount_local","TickCount_local"])
@@ -151,8 +158,6 @@ recordSelInt <- function(data = NULL, pops, pop, Strategy= NA) {
 SumseltInt <- function(data = NULL, SelInt_v ) {
   sumd = do.call(rbind, SelInt_v)
   res = data.frame(Generation    = Gen,
-                   #GEVariance   = varGE,
-                   #AdditiveCor  = corA,
                    Strategy      = Strategy,
                    SelInt1       = mean(sumd[, "SelInt1"]), 
                    SelInt2       = mean(sumd[, "SelInt2"])
@@ -166,28 +171,16 @@ SumseltInt <- function(data = NULL, SelInt_v ) {
   return(ret)
 }
 
-
-
-countQTL <- function(x) {length(which(x %in% c(0, 2)))/9000}
-countSnp <- function(x) {length(which(x %in% c(0, 2)))/42000}
-countSeg <- function(x) {length(which(x %in% c(0, 2)))/51000}
-
 CompCoefInb <- function(data = NULL, pop ) {
-  QTLGeno <- as.data.frame(pullQtlGeno(pop))
-  QTLGenoc <- apply(QTLGeno, 1, countQTL)
-  SnpGeno <- as.data.frame(pullSnpGeno(pop))
-  SnpGenoc <- apply(SnpGeno, 1, countSnp)
-  SegGeno <- as.data.frame(pullSegSiteGeno(pop))
-  SegGenoc <- apply(SegGeno, 1, countSeg)
-  
+  QTLGeno <- pullQtlGeno(pop)
+  SnpGeno <- pullSnpGeno(pop)
   res = data.frame(Generation   = Gen,
                    Strategy     = Strategy,
-                   MeanCoefQTL  = mean(QTLGenoc),
-                   SDCoefQTL    = sd(QTLGenoc),
-                   MeanCoefSnp  = mean(SnpGenoc),
-                   SDCoefSnp    = sd(SnpGenoc),
-                   MeanCoefSeg  = mean(SegGenoc),
-                   SDCoefSeg    = sd(SegGenoc))
+                   MeanCoefQTL  = mean(rowMeans(abs(QTLGeno-1))),
+                   SDCoefQTL    = sd(rowMeans(abs(QTLGeno-1))),
+                   MeanCoefSnp  = mean(rowMeans(abs(SnpGeno-1))),
+                   SDCoefSnp    = sd(rowMeans(abs(SnpGeno-1)))
+  )
   
   # Manage first instance of calling this function, when data is NULL
   if (is.null(data)) {
@@ -198,17 +191,50 @@ CompCoefInb <- function(data = NULL, pop ) {
   return(ret)
 }
 
-
 calcHeterosis <- function(popA, popB, hybPop) {
-  inbMean = (meanG(popA) + meanG(popB))/2
-  hybMean = meanG(hybPop)
-  heterosis = meanG(hybPop) - (meanG(popA) + meanG(popB))/2
-  perHeterosis = (hybMean-inbMean)/inbMean*100
-  return(data.frame("Midparent value" = inbMean,
-                    "Hybrid value" = hybMean,
-                    "Heterosis" = heterosis,
-                    "Percent heterosis" = perHeterosis))
+  MeanPopA <- meanP(popA)
+  MeanPopA <- c(MeanPopA, MeanPopA[1:2])
+  MeanPopB <- meanP(popB)
+  MeanPopB <- c(MeanPopB, MeanPopB[c(3, 4)])
+  hybMean = meanP(hybPop)  
+  hybMean <- c(hybMean, hybMean[1:2])
+  inbMean = (MeanPopA + MeanPopB)/2
+  heterosis = hybMean - inbMean
+  perHeterosis = heterosis/inbMean*100
+  res <- data.frame(Generation   = Gen,
+                    Strategy     = Strategy,
+                    "meanP_A"    = MeanPopA,
+                    "meanP_B"    = MeanPopB,
+                    "Midparent value" = inbMean,
+                    "Hybrid value"    = hybMean,
+                    "Heterosis"       = heterosis,
+                    "Percent heterosis" = perHeterosis)
+  res$Trait = c("BodyWeight_local",  "TickCount_local", 
+                "BodyWeight_exotic", "TickCount_exotic",
+                "BodyWeight_Hybrid",  "TickCount_Hybrid")
+  return(res [, c(9, 1:8)])
 }
-
-#table(unlist(getMisc(x = mergePops(HybridRefPop_v), node = "yearOfBirth")))
-#table(unlist(getMisc(x = ExoticRefPop, node = "yearOfBirth")))
+ 
+ calcHeterosis_G <- function(popA, popB, hybPop) {
+  MeanPopA <- meanG(popA)
+  MeanPopA <- c(MeanPopA, MeanPopA[1:2])
+  MeanPopB <- meanG(popB)
+  MeanPopB <- c(MeanPopB, MeanPopB[c(3, 4)])
+  hybMean = meanG(hybPop)  
+  hybMean <- c(hybMean, hybMean[1:2])
+  inbMean = (MeanPopA + MeanPopB)/2
+  heterosis = hybMean - inbMean
+  perHeterosis = heterosis/inbMean*100
+  res <- data.frame(Generation   = Gen,
+                    Strategy     = Strategy,
+                    "meanP_A"    = MeanPopA,
+                    "meanP_B"    = MeanPopB,
+                    "Midparent value" = inbMean,
+                    "Hybrid value"    = hybMean,
+                    "Heterosis"       = heterosis,
+                    "Percent heterosis" = perHeterosis)
+  res$Trait = c("BodyWeight_local",  "TickCount_local", 
+                "BodyWeight_exotic", "TickCount_exotic",
+                "BodyWeight_Hybrid",  "TickCount_Hybrid")
+  return(res [, c(9, 1:8)])
+}

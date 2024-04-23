@@ -1,23 +1,13 @@
 ###---------------------------------------------------------------------------------
 #                          Pure breeding over 20 generations 
 ###---------------------------------------------------------------------------------
-Strategy <- "PureBreeding"
 
 ###----- Local breeds  -----
-
-## Phenotype the base population
-LocalFounders = setPheno(pop = LocalFounders, h2 = h2)
- # Check parameters
-varP(LocalFounders) 
-varA(LocalFounders)
-varG(LocalFounders)
-varD(LocalFounders)
-varD(LocalFounders)[1] / varP(LocalFounders)[1] #Dominance heritability for BodyWeight_local
-varD(LocalFounders)[6] / varP(LocalFounders)[6] #Dominance heritability for TickCount_local
+Strategy <- "PureBreeding_Local"
 
 ## Select initial parents - 
  # Phenotypic selection considering lower values for the trait "TickCount_local"
-LocalBulls <- selectInd(LocalFounders, nInd= 100, trait = "TickCount_local", use = "pheno", sex = "M", selectTop = F)
+LocalBulls <- selectInd(LocalFounders, nInd= 200, trait = "TickCount_local", use = "pheno", sex = "M")
 LocalCows <- LocalFounders[LocalFounders@sex=="F"]
 
 ## Record Phenotypic and genetic values for the initial local population
@@ -41,16 +31,20 @@ for (Gen in 1:20){
   RefLocalPop <- c(RefLocalPop, Offsprings)
   Candidates <- RefLocalPop[RefLocalPop@misc>= Gen - 4] #Consider only the last 5 generations for animal selections
   
+  ## Select bulls and cows for the next generation
   LocalBulls <- selectInd(Candidates[Candidates@misc>= Gen - 1],  #only bulls from the last two generations are selected
-                          nInd=100, trait = "TickCount_local", use = "pheno", sex = "M", selectTop = F)
- 
-  if (Gen <= 4) { #for the first 4 generations
+                          nInd=200, trait = "TickCount_local", use = "pheno", sex = "M")
+   if (Gen <= 4) { #for the first 4 generations
     LocalCows <- Candidates[Candidates@sex=="F"]  #all females are considered at this stage
   } else {
-    LocalCows <- selectInd(Candidates, nInd=10000, trait = "TickCount_local", use = "pheno", sex = "F", selectTop = F)
+    LocalCows <- selectInd(Candidates, nInd=10000, trait = "TickCount_local", use = "pheno", sex = "F")
   }
 }
 #save local population at Generation 20
+LocalCows_Nucleus <- selectInd(LocalCows[LocalCows@misc!= 20], nInd=2000, trait = "TickCount_local", 
+                              use = "pheno", sex = "F")
+LocalBulls_Nucleus <- selectInd(LocalBulls, nInd=nBull_v*nVillages, trait = "TickCount_local", 
+                               use = "pheno", sex = "M")
 LocalBreed20 <- Offsprings
 
 #Calculate average breeding values for the local breed considering the simulated 20 generations
@@ -59,16 +53,7 @@ MeanDD_Local <- CalcMeanDD(RefLocalPop)
 
 
 ###----- Exotic breeds -----
-
-## Phenotype the base population
-ExoticFounders = setPheno(pop = ExoticFounders, h2 = h2)
- # Check parameters
-varP(ExoticFounders)
-varA(ExoticFounders)
-varG(ExoticFounders)
-varD(ExoticFounders)
-varD(ExoticFounders)[11] / varP(ExoticFounders)[11] #Dominance heritability for BodyWeight_exotic
-varD(ExoticFounders)[16] / varP(ExoticFounders)[16] #Dominance heritability for TickCount_exotic
+Strategy <- "PureBreeding_exotic"
 
 ## Estimate EBV for the base population
 ans = RRBLUP(ExoticFounders, traits = "BodyWeight_exotic")
@@ -95,7 +80,6 @@ for (Gen in 1:20){
   Offsprings <- setPheno (Offsprings, h2=  h2)
   Offsprings = setMisc(x = Offsprings, node = "yearOfBirth", value = Gen)
   Summary_ExoticBreed <- recordSummary(data = Summary_ExoticBreed, pop = Offsprings, year = Gen)
-
   RefExoticPop <- c(RefExoticPop, Offsprings)
   Candidates <- RefExoticPop[RefExoticPop@misc>= Gen - 4] 
   
@@ -103,16 +87,16 @@ for (Gen in 1:20){
   ans = RRBLUP(Candidates, traits = "BodyWeight_exotic")
   Candidates <- setEBV(Candidates, ans)
   
+  ## Select bulls and cows for the next generation
   ExoticBulls <- selectInd(Candidates[Candidates@misc>= Gen - 1],  #only bulls from the last two generations are selected
                           nInd= 50, trait = 1, use = "ebv", sex = "M")
   ExoticCows <- selectInd(Candidates, nInd=2000, trait = 1, use = "ebv", sex = "F")
-  
-}
-
+  }
 
 ## Save exotic populations at Generation 20
 ExoticBreed20 <- Offsprings
-ExoticCandidates20 <- Candidates[Candidates@misc== 20]
+ExoticBulls_Nucleus <- ExoticBulls
+ExoticCows_Nucleus <- ExoticCows
 
 #Calculate average breeding values for the exotic breed considering the simulated 20 generations
 MeanBV_Exotic <- CalcMeanBV(RefExoticPop)
@@ -128,6 +112,6 @@ ExportData <- c("Summary_LocalBreed", "MeanBV_Local", "MeanDD_Local",
                 "Fst", "HetFounders", "HetLocalFounders")
 for (i in ExportData) {
   dat <- get(i)
-  write.table(dat, file = paste0(cwd,"/","Results/",i, "_", Strategy, ".txt" ),
+  write.table(dat, file = paste0(cwd,"/Results/",i, ".txt" ),
               append =T, row.names = F, col.names = F )
 }
