@@ -41,16 +41,18 @@ repeat {
   ExoticFounders = Founders[2501:5000]
   ExoticFounders@sex <- sample(rep(c("F","M"), c(2000, 500)), 2500, replace = F)
   ExoticFounders = setPheno(pop = ExoticFounders, h2 = h2)
+
+  #Ensure that the expected heritabilities are obtained in the founder populations
   h2_local <- diag(varA(LocalFounders)/varP(LocalFounders))
   h2_exotic <- diag(varA(ExoticFounders)/varP(ExoticFounders))
   print(h2_local)
   print(h2_exotic)
   if (h2_local[1] > 0.27 & h2_local[1] < 0.33 & 
       h2_local[2] > 0.09 & h2_local[2] < 0.11 &
-	  h2_exotic[1] > 0.27 & h2_exotic[1] < 0.33 &
+      h2_exotic[1] > 0.27 & h2_exotic[1] < 0.33 &
       h2_exotic[2] > 0.09 & h2_exotic[2] < 0.11 &
       h2_exotic[3] > 0.27 & h2_exotic[3] < 0.33 &
-	  h2_exotic[4] > 0.09 & h2_exotic[4] < 0.11){
+      h2_exotic[4] > 0.09 & h2_exotic[4] < 0.11){
     break
   }
 }
