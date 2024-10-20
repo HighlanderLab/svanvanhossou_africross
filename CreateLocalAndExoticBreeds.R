@@ -27,14 +27,14 @@ for (Gen in 1:20) {
   # Gen <- 1
   Offsprings <- randCross2(females = LocalCows, males = LocalBulls, nCrosses = nInd(LocalCows))
   Offsprings <- setPheno (Offsprings, h2 = h2)
-  Offsprings@misc <- list(yearOfBirth = rep(Gen, times = nInd(Offsprings)))
+  Offsprings@misc <- list(gen = rep(Gen, times = nInd(Offsprings)))
   Summary_LocalBreed <- recordSummary(data = Summary_LocalBreed, pop = Offsprings, year = Gen)
 
   RefLocalPop <- c(RefLocalPop, Offsprings)
-  Candidates <- RefLocalPop[RefLocalPop@misc$yearOfBirth >= (Gen - 4)] # Consider only the last 5 generations for animal selections
+  Candidates <- RefLocalPop[RefLocalPop@misc$gen >= (Gen - 4)] # Consider only the last 5 generations for animal selections
 
   # Select bulls and cows for the next generation
-  LocalBulls <- selectInd(Candidates[Candidates@misc$yearOfBirth >= (Gen - 1)], # only bulls from the last two generations are selected
+  LocalBulls <- selectInd(Candidates[Candidates@misc$gen >= (Gen - 1)], # only bulls from the last two generations are selected
                           nInd = 200, trait = "TickCount_local", use = "pheno", sex = "M")
   if (Gen <= 4) { # for the first 4 generations
     LocalCows <- Candidates[Candidates@sex == "F"] # all females are considered at this stage
@@ -44,7 +44,7 @@ for (Gen in 1:20) {
 }
 
 # save local population at Generation 20
-LocalCows_Nucleus <- selectInd(LocalCows[LocalCows@misc$yearOfBirth != 20],
+LocalCows_Nucleus <- selectInd(LocalCows[LocalCows@misc$gen != 20],
                                nInd = 2000, trait = "TickCount_local", use = "pheno", sex = "F")
 LocalBulls_Nucleus <- selectInd(LocalBulls, nInd = nBull_v*nVillages, trait = "TickCount_local",
                                 use = "pheno", sex = "M")
@@ -82,17 +82,17 @@ for (Gen in 1:20) {
   # Gen <- 1
   Offsprings <- randCross2(females = ExoticCows, males = ExoticBulls, nCrosses = nInd(ExoticCows))
   Offsprings <- setPheno (Offsprings, h2 = h2)
-  Offsprings@misc <- list(yearOfBirth = rep(Gen, times = nInd(Offsprings)))
+  Offsprings@misc <- list(gen = rep(Gen, times = nInd(Offsprings)))
   Summary_ExoticBreed <- recordSummary(data = Summary_ExoticBreed, pop = Offsprings, year = Gen)
   RefExoticPop <- c(RefExoticPop, Offsprings)
-  Candidates <- RefExoticPop[RefExoticPop@misc$yearOfBirth >= (Gen - 4)]
+  Candidates <- RefExoticPop[RefExoticPop@misc$gen >= (Gen - 4)]
 
   # Estimate EBV for the reference population (the last 5 generations)
   ans <- RRBLUP(Candidates, traits = "BodyWeight_exotic")
   Candidates <- setEBV(Candidates, ans)
 
   ## Select bulls and cows for the next generation
-  ExoticBulls <- selectInd(Candidates[Candidates@misc$yearOfBirth >= (Gen - 1)], # only bulls from the last two generations are selected
+  ExoticBulls <- selectInd(Candidates[Candidates@misc$gen >= (Gen - 1)], # only bulls from the last two generations are selected
                           nInd = 50, trait = 1, use = "ebv", sex = "M")
   ExoticCows <- selectInd(Candidates, nInd = 2000, trait = 1, use = "ebv", sex = "F")
 }

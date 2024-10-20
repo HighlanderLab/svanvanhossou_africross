@@ -41,7 +41,7 @@ for (v in 1:nVillages) {
                                                males = ExoticBulls20_v[[v]][Bindex[f]],
                                                nCrosses = nInd(LocalCows_f[[v]][[f]]))
     HybridOffsprings_f[[v]][[f]] <- setPheno(HybridOffsprings_f[[v]][[f]], h2= h2)
-    HybridOffsprings_f[[v]][[f]]@misc <- list(yearOfBirth = rep(Gen, times = nInd(HybridOffsprings_f[[v]][[f]])))
+    HybridOffsprings_f[[v]][[f]]@misc <- list(gen = rep(Gen, times = nInd(HybridOffsprings_f[[v]][[f]])))
     HybridRefPop_f[[v]][[f]]<-  HybridOffsprings_f[[v]][[f]]
     # Select hybrids cows and bulls at farm level
     HybridCows_f[[v]][[f]] <- HybridOffsprings_f[[v]][[f]][HybridOffsprings_f[[v]][[f]]@sex == "F"]
@@ -88,12 +88,12 @@ for (Gen in 22:40) {
                                                  males = HybridBulls_f[[v]][[f]],
                                                  nCrosses = nInd(HybridCows_f[[v]][[f]]))
       HybridOffsprings_f[[v]][[f]] <- setPheno(HybridOffsprings_f[[v]][[f]], h2 = h2)
-      HybridOffsprings_f[[v]][[f]]@misc <- list(yearOfBirth = rep(Gen, times = nInd(HybridOffsprings_f[[v]][[f]])))
+      HybridOffsprings_f[[v]][[f]]@misc <- list(gen = rep(Gen, times = nInd(HybridOffsprings_f[[v]][[f]])))
       HybridRefPop_f[[v]][[f]]<- c(HybridRefPop_f[[v]][[f]], HybridOffsprings_f[[v]][[f]])
       # Select hybrid cows
-      sel <- HybridRefPop_f[[v]][[f]]@misc$yearOfBirth >= (Gen - 4)
+      sel <- HybridRefPop_f[[v]][[f]]@misc$gen >= (Gen - 4)
       Candidates_f[[v]][[f]] <- HybridRefPop_f[[v]][[f]][sel]
-      sel <- HybridRefPop_f[[v]][[f]]@misc$yearOfBirth >= (Gen - 1)
+      sel <- HybridRefPop_f[[v]][[f]]@misc$gen >= (Gen - 1)
       Candidates2_f[[v]][[f]] <- HybridRefPop_f[[v]][[f]][sel]
       HybridCows_f[[v]][[f]] <- selectInd(Candidates_f[[v]][[f]], nInd = nInd(Villages[[v]][[f]]), sex ="F",
                                           trait = selIndex, b = TraitIndex, use ="pheno")

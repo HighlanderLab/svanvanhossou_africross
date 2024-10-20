@@ -76,7 +76,7 @@ recordSummary <- function(data = NULL, pop, year = NA) {
 
 CalcMeanBV <- function(pop) {
   BV <- as.data.frame(bv(pop))
-  BV$Gen <- unlist(pop@misc)
+  BV$Gen <- pop@misc$gen
   MeanBV <- aggregate(BV[, 1:4], list(BV$Gen), mean)
   colnames(MeanBV)[1] <- "Generation"
   MeanBV$Strategy <- Strategy
@@ -85,7 +85,7 @@ CalcMeanBV <- function(pop) {
 
 CalcMeanDD <- function(pop) {
   DD <- as.data.frame(dd(pop))
-  DD$Gen <- unlist(pop@misc)
+  DD$Gen <- pop@misc$gen
   MeanDD <- aggregate(DD[, 1:4], list(DD$Gen), mean)
   colnames(MeanDD)[1] <- "Generation"
   MeanDD$Strategy <- Strategy

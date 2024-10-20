@@ -47,7 +47,7 @@ repeat {
 
   # Generate initial founder population
   Founders <- newPop(FounderGenomes)
-  Founders@misc <- list(yearOfBirth = rep(0, times = nInd(Founders)))
+  Founders@misc <- list(gen = rep(0, times = nInd(Founders)))
 
   # Split the initial founder into local and exotic founders
   LocalFounders <- Founders[1:2500]
