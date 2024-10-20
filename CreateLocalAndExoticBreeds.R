@@ -1,4 +1,5 @@
-# Pure breeding over 20 generations
+
+# Local and exotic breeds
 
 # ---- Local breeds ----
 

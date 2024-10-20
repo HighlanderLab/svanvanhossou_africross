@@ -24,33 +24,33 @@ for (Rep in 1:40) {
 
   # ---- Functions, parameters, founders, breeds, and farms ----
 
-  # Load functions
+  # Custom functions
   source("Functions.R")
 
-  # Simulation Parameters
+  # Simulation parameters
   source("SimParameters.R")
 
-  # Simulation of founder populations
+  # Founder populations
   source("CreateFounderPops.R")
 
-  # Simulation of local and exotic breeds
+  # Local and exotic breeds
   source("CreateLocalAndExoticBreeds.R")
 
-  # Simulation of local farms and villages
+  # Villages and farms
   source("CreateFarmsAndVillages.R")
 
   # ---- Crossbreeding strategies ----
 
-  # Composite Farm bull
+  # Composite "farm bull"
   source("Cross_Composite_FB.R")
 
-  # Composite Intra village bull
+  # Composite "intra-village bull"
   source("Cross_Composite_IVB.R")
 
-  # Composite Extra village bull
+  # Composite "extra-village bull"
   source("Cross_Composite_EVB.R")
 
-  # Composite Population wide bull
+  # Composite "population-wide bull"
   source("Cross_Composite_PWB.R")
 
   # Rotational

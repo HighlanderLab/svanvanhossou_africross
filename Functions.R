@@ -1,3 +1,6 @@
+
+# Custom functions
+
 require(package = "AlphaSimR")
 
 calcFst <- function(pop1, pop2, pop) {
