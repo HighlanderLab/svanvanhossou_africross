@@ -48,10 +48,10 @@ TraitCor <- matrix(c(1,         CorA,      CorE,      CorA*CorE,
 
 # ---- Dominance ----
 
-# the expected proportion of dominance variance (VD) to phenotype variance (VP) is:
+# The expected proportion of dominance variance (VD) to phenotype variance (VP) is:
 # 0.1 for Body weight and 0.04 for Tickcount
-DomMean <- c(0.18, 0.08, 0.18, 0.08)
-DomVar  <- c(1, 1.3, 1, 1.3)
+DomMeanDD <- c(0.18, 0.08, 0.18, 0.08)
+DomVarDD  <- c(1.0, 1.3, 1.0, 1.3)
 
 # ---- Parameters  to simulate villages and farms ----
 

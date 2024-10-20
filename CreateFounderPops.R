@@ -40,8 +40,8 @@ repeat {
                 mean = PhenoMean,
                 var = AdditVar,
                 corA = TraitCor,
-                meanDD = DomMean,
-                varDD = DomVar,
+                meanDD = DomMeanDD,
+                varDD = DomVarDD,
                 name = c("BodyWeight_local", "TickCount_local",
                          "BodyWeight_exotic", "TickCount_exotic"))
 
