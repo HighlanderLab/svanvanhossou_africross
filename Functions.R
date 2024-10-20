@@ -89,56 +89,51 @@ CalcMeanDD <- function(pop) {
   return(MeanDD)
 }
 
-AssignBull_v <- function(pop, nVil, nBull_v){
-  Bull_v <- vector("list",nVil)
-  names(Bull_v) <- paste0("Village",c(1:nVil))
-
-  BullOrder <- sample(pop@id,size=nInd(pop),replace=F) # randomly sample CowIDs
-
-  for (i in (1:length(Bull_v))){ # For each Farm
-    Bull_v[[i]] <- pop[match(BullOrder[1:nBull_v],pop@id)]
+AssignBull_v <- function(pop, nVil, nBull_v) {
+  Bull_v <- vector("list", nVil)
+  names(Bull_v) <- paste0("Village", c(1:nVil))
+  BullOrder <- sample(pop@id,size=nInd(pop),replace=FALSE) # Randomly sample CowIDs
+  for (i in (1:length(Bull_v))) { # For each Farm
+    Bull_v[[i]] <- pop[match(BullOrder[1:nBull_v], pop@id)]
     BullOrder <- BullOrder[-c(1:nBull_v)]
   }
   return(Bull_v)
 }
 
-AssignBull_f <- function(pop){
-  Bull <- vector("list",nFarms)
+AssignBull_f <- function(pop) {
+  Bull <- vector("list", nFarms)
   names(Bull) <- paste0("Farm", c(1:nFarms))
-  BullOrder <- sample(pop@id,size=nFarms,replace=F)
-  for (f in (1:nFarms)){
+  BullOrder <- sample(pop@id, size=nFarms, replace=FALSE)
+  for (f in (1:nFarms)) {
     Bull[[f]] <- pop[match(BullOrder[f],pop@id)]
   }
-
-  Bull_f <- vector("list",nVillages)
-  names( Bull_f) <- paste0("Village",c(1:nVillages))
-  start <- seq(1,nFarms,by=nFarms/nVillages)
-  stop <- seq(nFarms/nVillages,nFarms,by=nFarms/nVillages)
-  for (each in (1:nVillages)){ #For each Village
+  Bull_f <- vector("list", nVillages)
+  names( Bull_f) <- paste0("Village", c(1:nVillages))
+  start <- seq(1,nFarms, by=nFarms/nVillages)
+  stop <- seq(nFarms/nVillages,nFarms, by=nFarms/nVillages)
+  for (each in (1:nVillages)) { # For each Village
     Bull_f [[each]] <- Bull[FarmOrder[start[each]:stop[each]]]
   }
   return(Bull_f)
 }
 
-
-AssignCow_v <- function(pop, nVil){
-  Cow_v <- vector("list",nVil)
-  names(Cow_v) <- paste0("Village",c(1:nVil))
-
-  CowOrder <- sample(pop@id,size=nInd(pop),replace=F) #randomly sample CowIDs
+AssignCow_v <- function(pop, nVil) {
+  Cow_v <- vector("list", nVil)
+  names(Cow_v) <- paste0("Village", c(1:nVil))
+  CowOrder <- sample(pop@id, size=nInd(pop), replace=FALSE) # Randomly sample CowIDs
   nCow_v <- nInd(pop)/nVil
-  for (i in (1:length(Cow_v))){ #For each Farm
-    Cow_v[[i]] <- pop[match(CowOrder[1:nCow_v],pop@id)]
+  for (i in (1:length(Cow_v))) { # For each Farm
+    Cow_v[[i]] <- pop[match(CowOrder[1:nCow_v], pop@id)]
     CowOrder <- CowOrder[-c(1:nCow_v)]
   }
   return(Cow_v)
 }
 
 recordSelInt <- function(data = NULL, pops, pop, Strategy= NA) {
-  popData <- data.frame(Generation   = Gen,
-                        Strategy     = Strategy,
-                        SelInt1        = (meanP(pops)["BodyWeight_local"] - meanP(pop)["BodyWeight_local"])/sqrt(varP(pop)["BodyWeight_local","BodyWeight_local"]),
-                        SelInt2        = (meanP(pops)["TickCount_local"] - meanP(pop)["TickCount_local"])/sqrt(varP(pop)["TickCount_local","TickCount_local"])
+  popData <- data.frame(Generation = Gen,
+                        Strategy   = Strategy,
+                        SelInt1    = (meanP(pops)["BodyWeight_local"] - meanP(pop)["BodyWeight_local"])/sqrt(varP(pop)["BodyWeight_local","BodyWeight_local"]),
+                        SelInt2    = (meanP(pops)["TickCount_local"] - meanP(pop)["TickCount_local"])/sqrt(varP(pop)["TickCount_local","TickCount_local"])
   )
   # Manage first instance of calling this function, when data is NULL
   if (is.null(data)) {
@@ -151,10 +146,10 @@ recordSelInt <- function(data = NULL, pops, pop, Strategy= NA) {
 
 SumseltInt <- function(data = NULL, SelInt_v ) {
   sumd <- do.call(rbind, SelInt_v)
-  res <- data.frame(Generation    = Gen,
-                    Strategy      = Strategy,
-                    SelInt1       = mean(sumd[, "SelInt1"]),
-                    SelInt2       = mean(sumd[, "SelInt2"])
+  res <- data.frame(Generation = Gen,
+                    Strategy   = Strategy,
+                    SelInt1    = mean(sumd[, "SelInt1"]),
+                    SelInt2    = mean(sumd[, "SelInt2"])
   )
   # Manage first instance of calling this function, when data is NULL
   if (is.null(data)) {
@@ -168,12 +163,12 @@ SumseltInt <- function(data = NULL, SelInt_v ) {
 CompCoefInb <- function(data = NULL, pop ) {
   QTLGeno <- pullQtlGeno(pop)
   SnpGeno <- pullSnpGeno(pop)
-  res <- data.frame(Generation   = Gen,
-                    Strategy     = Strategy,
-                    MeanCoefQTL  = mean(rowMeans(abs(QTLGeno-1))),
-                    SDCoefQTL    = sd(rowMeans(abs(QTLGeno-1))),
-                    MeanCoefSnp  = mean(rowMeans(abs(SnpGeno-1))),
-                    SDCoefSnp    = sd(rowMeans(abs(SnpGeno-1)))
+  res <- data.frame(Generation  = Gen,
+                    Strategy    = Strategy,
+                    MeanCoefQTL = mean(rowMeans(abs(QTLGeno-1))),
+                    SDCoefQTL   = sd(rowMeans(abs(QTLGeno-1))),
+                    MeanCoefSnp = mean(rowMeans(abs(SnpGeno-1))),
+                    SDCoefSnp   = sd(rowMeans(abs(SnpGeno-1)))
   )
   # Manage first instance of calling this function, when data is NULL
   if (is.null(data)) {
@@ -194,13 +189,13 @@ calcHeterosis <- function(popA, popB, hybPop) {
   inbMean <- (MeanPopA + MeanPopB)/2
   heterosis <- hybMean - inbMean
   perHeterosis <- heterosis/inbMean*100
-  res <- data.frame(Generation   = Gen,
-                    Strategy     = Strategy,
-                    "meanP_A"    = MeanPopA,
-                    "meanP_B"    = MeanPopB,
-                    "Midparent value" = inbMean,
-                    "Hybrid value"    = hybMean,
-                    "Heterosis"       = heterosis,
+  res <- data.frame(Generation          = Gen,
+                    Strategy            = Strategy,
+                    "meanP_A"           = MeanPopA,
+                    "meanP_B"           = MeanPopB,
+                    "Midparent value"   = inbMean,
+                    "Hybrid value"      = hybMean,
+                    "Heterosis"         = heterosis,
                     "Percent heterosis" = perHeterosis)
   res$Trait <- c("BodyWeight_local",  "TickCount_local",
                  "BodyWeight_exotic", "TickCount_exotic",
@@ -218,13 +213,13 @@ calcHeterosis_G <- function(popA, popB, hybPop) {
   inbMean <- (MeanPopA + MeanPopB)/2
   heterosis <- hybMean - inbMean
   perHeterosis <- heterosis/inbMean*100
-  res <- data.frame(Generation   = Gen,
-                    Strategy     = Strategy,
-                    "meanP_A"    = MeanPopA,
-                    "meanP_B"    = MeanPopB,
-                    "Midparent value" = inbMean,
-                    "Hybrid value"    = hybMean,
-                    "Heterosis"       = heterosis,
+  res <- data.frame(Generation          = Gen,
+                    Strategy            = Strategy,
+                    "meanP_A"           = MeanPopA,
+                    "meanP_B"           = MeanPopB,
+                    "Midparent value"   = inbMean,
+                    "Hybrid value"      = hybMean,
+                    "Heterosis"         = heterosis,
                     "Percent heterosis" = perHeterosis)
   res$Trait <- c("BodyWeight_local",  "TickCount_local",
                  "BodyWeight_exotic", "TickCount_exotic",

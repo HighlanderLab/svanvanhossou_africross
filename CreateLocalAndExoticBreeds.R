@@ -22,7 +22,8 @@ RefLocalPop <- LocalFounders
 # From generation 0 to 4 no selection of cows were applied to increase the population size of the local breed to 10.000 breeding females
 # From generation 5, 10.000 females are selected within animal from the last 5 generations (cows are used for max.5 generations)
 
-for (Gen in 1:20){
+for (Gen in 1:20) {
+  # Gen <- 1
   Offsprings <- randCross2(females = LocalCows, males = LocalBulls, nCrosses = nInd(LocalCows))
   Offsprings <- setPheno (Offsprings, h2 = h2)
   Offsprings@misc <- list(yearOfBirth = rep(Gen, times = nInd(Offsprings)))
@@ -32,7 +33,7 @@ for (Gen in 1:20){
   Candidates <- RefLocalPop[RefLocalPop@misc$yearOfBirth >= (Gen - 4)] # Consider only the last 5 generations for animal selections
 
   # Select bulls and cows for the next generation
-  LocalBulls <- selectInd(Candidates[Candidates@misc >= (Gen - 1)], # only bulls from the last two generations are selected
+  LocalBulls <- selectInd(Candidates[Candidates@misc$yearOfBirth >= (Gen - 1)], # only bulls from the last two generations are selected
                           nInd = 200, trait = "TickCount_local", use = "pheno", sex = "M")
   if (Gen <= 4) { # for the first 4 generations
     LocalCows <- Candidates[Candidates@sex == "F"] # all females are considered at this stage
@@ -42,8 +43,8 @@ for (Gen in 1:20){
 }
 
 # save local population at Generation 20
-LocalCows_Nucleus <- selectInd(LocalCows[LocalCows@misc != 20], nInd = 2000, trait = "TickCount_local",
-                               use = "pheno", sex = "F")
+LocalCows_Nucleus <- selectInd(LocalCows[LocalCows@misc$yearOfBirth != 20],
+                               nInd = 2000, trait = "TickCount_local", use = "pheno", sex = "F")
 LocalBulls_Nucleus <- selectInd(LocalBulls, nInd = nBull_v*nVillages, trait = "TickCount_local",
                                 use = "pheno", sex = "M")
 LocalBreed20 <- Offsprings
@@ -76,20 +77,21 @@ RefExoticPop <- ExoticFounders
 # 50 bulls are selected  within animals from the last two generations (bulls are used for max. 2 generations)
 # 2.000 cows are selected of cows within animals from the last 5 generations (cows are used for max. 5 generations)
 
-for (Gen in 1:20){
+for (Gen in 1:20) {
+  # Gen <- 1
   Offsprings <- randCross2(females = ExoticCows, males = ExoticBulls, nCrosses = nInd(ExoticCows))
   Offsprings <- setPheno (Offsprings, h2 = h2)
-  Offsprings <- list(yearOfBirth = rep(Gen, times = nInd(Offsprings)))
+  Offsprings@misc <- list(yearOfBirth = rep(Gen, times = nInd(Offsprings)))
   Summary_ExoticBreed <- recordSummary(data = Summary_ExoticBreed, pop = Offsprings, year = Gen)
   RefExoticPop <- c(RefExoticPop, Offsprings)
-  Candidates <- RefExoticPop[RefExoticPop@misc >= (Gen - 4)]
+  Candidates <- RefExoticPop[RefExoticPop@misc$yearOfBirth >= (Gen - 4)]
 
   # Estimate EBV for the reference population (the last 5 generations)
   ans <- RRBLUP(Candidates, traits = "BodyWeight_exotic")
   Candidates <- setEBV(Candidates, ans)
 
   ## Select bulls and cows for the next generation
-  ExoticBulls <- selectInd(Candidates[Candidates@misc >= (Gen - 1)], # only bulls from the last two generations are selected
+  ExoticBulls <- selectInd(Candidates[Candidates@misc$yearOfBirth >= (Gen - 1)], # only bulls from the last two generations are selected
                           nInd = 50, trait = 1, use = "ebv", sex = "M")
   ExoticCows <- selectInd(Candidates, nInd = 2000, trait = 1, use = "ebv", sex = "F")
 }
@@ -116,5 +118,5 @@ ExportData <- c("Summary_LocalBreed", "MeanBV_Local", "MeanDD_Local",
 for (i in ExportData) {
   dat <- get(i)
   write.table(dat, file = paste0(cwd, "/Results/", i, ".txt"),
-              append = TRUE, row.names = FALSE, col.names = FALSEW)
+              append = TRUE, row.names = FALSE, col.names = FALSE)
 }

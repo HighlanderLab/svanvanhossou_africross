@@ -3,8 +3,10 @@
 
 # This part of simulation with runMacs() and repeat {} is quite slow!
 # There are two options one can take regarding runMacs():
-# 1) Save the simulated founder genomes and load them in the next run (see warning below)
-# 2) Use the quickHaplo() function to speed up the simulation (only for testing purposes)
+# 1) Save the simulated founder genomes and load them in the next run
+#    (only for testing purposes - we want variation between replicates)
+# 2) Use the quickHaplo() function to speed up the simulation
+#    (only for testing purposes - it does not generate properly structured genomes)
 
 # ---- Simulate Founders genome ----
 

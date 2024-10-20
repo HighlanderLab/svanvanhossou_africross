@@ -7,6 +7,11 @@ if (!dir.exists(paste0("./Results"))) {dir.create(paste0("./Results"))}
 
 # ---- Load packages ----
 
+AlphaSimRVersion <- packageVersion(pkg = "AlphaSimR")
+if (!(AlphaSimRVersion >= "1.6.0")) {
+  stop(paste("We have AlphaSimR version", AlphaSimRVersion, "\n",
+             "but require 1.6.0 or above!"))
+}
 library(package = "AlphaSimR")
 library(package = "gdata")
 

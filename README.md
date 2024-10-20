@@ -7,10 +7,11 @@ in African cattle production system with smallholders and large differences betw
 local and exotic breeds in terms of production and adaptation traits. Details of
 the study are available in:
 
-    Sèyi Fridaius Ulrich Vanvanhossou, Tong Yin, Gregor Gorjanc, Sven König (2024)
-    Evaluation of crossbreeding strategies for improved adaptation and productivity
-    in African smallholder cattle farms.
+    Sèyi Fridaius Ulrich Vanvanhossou, Tong Yin, Gregor Gorjanc, Sven König
+    Evaluation of crossbreeding strategies for improved adaptation and productivity in African smallholder cattle farms.
     Under review in Genetics Selection Evolution.
+
+You need AlphaSimR version 1.6.0 or higher to run the scripts.
 
 The code is organised in different areas as follows:
 - Main,
