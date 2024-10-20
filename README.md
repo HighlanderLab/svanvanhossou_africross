@@ -67,13 +67,13 @@ All key simulation parameters are stored and driven from this file. See also
 In this script we used values from `SimParameters.R` and simulated:
 - a cattle genome with 30 chromosome pairs for 5,000 founder individuals;
   we tracked 300 QTL and 1400 SNP on each chromosome.
-- two complex traits with additive and dominance egenetic ffects:
+- two complex traits with additive and dominance genetic effects:
   - body weight (productive trait with moderate heritability) and
   - tick count (adaptive trait with low heritability).
 
 We assumed: 
 - a population split 20.000 generations ago corresponding to 100.000 years split
-  between Taurine and Indicine cattle (TODO: where is this done??! We don't have a split!)
+  between Taurine and Indicine cattle
 - all the traits are controlled by the same pleiotropic QTL having correlated effects
 - the same heritability in the two breeds but different phenotypic mean and variance
   in the two breeds, leading to 2 x 2 = 4 simulated traits

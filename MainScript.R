@@ -8,14 +8,14 @@ if (!dir.exists(paste0("./Results"))) {dir.create(paste0("./Results"))}
 # ---- Load packages ----
 
 library(package = "AlphaSimR")
-library(package = gdata)
+library(package = "gdata")
 
 # ---- Simulation with 40 replicates ----
 
 for (Rep in 1:40) {
-
+  # Rep <- 1
   rm(list = ls())
-  cwd = getwd()
+  cwd <- getwd()
 
   # ---- Functions, parameters, founders, breeds, and farms ----
 

@@ -4,10 +4,10 @@
 # ---- Global parameters to simulate the founders genome ----
 
 NFounders <- 5000
-nChr<- 30
+nChr <- 30
 nSNP <- 1400
 nQTL <- 300
-nSplit<- 20000
+nSplit <- 20000
 
 # ---- Genetic parameters for 2 x 2 polygenic traits ----
 

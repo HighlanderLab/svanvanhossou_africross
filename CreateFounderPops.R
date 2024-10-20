@@ -1,22 +1,36 @@
 
 # Simulation of cattle genome & founder populations
 
+# This part of simulation with runMacs() and repeat {} is quite slow!
+# There are two options one can take regarding runMacs():
+# 1) Save the simulated founder genomes and load them in the next run (see warning below)
+# 2) Use the quickHaplo() function to speed up the simulation (only for testing purposes)
+
 # ---- Simulate Founders genome ----
 
+# We can speed this up by saving founder genomes and loading them instead
+# Beware, we must however resimulate founder genomes for each replicate!
 FounderGenomes <- runMacs(
   nInd = NFounders,
   nChr = nChr,
   segSites = nSNP + nQTL,
-  inbred = FALSE,
-  split  = nSplit,
-  species = "CATTLE"
-)
+  split = nSplit,
+  species = "CATTLE")
+if (FALSE) {
+  FounderGenomes <- quickHaplo(
+    nInd = NFounders,
+    nChr = nChr,
+    segSites = nSNP + nQTL)
+}
 # save(FounderGenomes, file = "FounderGenomes.RData")
 # load(file = "FounderGenomes.RData")
 
 # ---- Traits with additive and dominance genetic effects ----
 
 # Using repeat to get a desired setting with additive and dominance effects
+# (ongoing work by AlphaSimR developers will remove the need for such an approach;
+#  it will enable specifying the desired level of dominance variance and inbreeding
+#  depression)
 repeat {
   SP <- SimParam$new(FounderGenomes)
   SP$addSnpChip(nSnpPerChr=nSNP)
@@ -60,6 +74,8 @@ cat("Ratio of dominance variance to phenotypic variance\n")
 print(diag(varD(LocalFounders)/varP(LocalFounders)))
 print(diag(varD(LocalFounders)/varP(LocalFounders)))
 
+# TODO: Is there a reason you wanted to reset the last ID and pedigree or should
+#       SP$resetPed() be removed?
 SP$resetPed()
 SP$setSexes("yes_sys")
 
