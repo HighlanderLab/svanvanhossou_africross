@@ -1,5 +1,5 @@
 
-# Simulation of cattle genome & founder populations
+# Founder populations
 
 # This part of simulation with runMacs() and repeat {} is quite slow!
 # There are two options one can take regarding runMacs():

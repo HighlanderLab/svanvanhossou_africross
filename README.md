@@ -16,10 +16,16 @@ You need AlphaSimR version 1.6.0 or higher to run the scripts.
 The code is organised in different areas as follows:
 - Main,
 - Custom functions,
-- Simulation Parameters,
-- Simulation of founder populations,
-- Simulation of a local and exotic breeds,
-- TODO
+- Simulation parameters,
+- Founder populations,
+- Local and exotic breeds,
+- Villages and farms
+- Crossbreeding - composite "farm bull"
+- Crossbreeding - composite "intra-village bull"
+- Crossbreeding - composite "extra-village bull"
+- Crossbreeding - composite "population-wide bull"
+- Crossbreeding - rotational
+- Crossbreeding - terminal
 
 The rest of this document provides a brief description of each area.
 
@@ -46,7 +52,7 @@ scenarios, and rund replicates.
 These are custom functions in R for specific tasks, e.g., calculate average
 phenotypic and genetic values, and further statistical analyses.
 
-## Simulation Parameters
+## Simulation parameters
 
 ##### Code
 
@@ -55,9 +61,9 @@ phenotypic and genetic values, and further statistical analyses.
 ##### Description
 
 All key simulation parameters are stored and driven from this file. See also
-`CreateFounderPops.R` and TODO
+`CreateFounderPops.R` and `CreateLocalAndExoticBreeds.R`.
 
-## Simulation of founder populations
+## Founder populations
   
 ##### Code
 
@@ -82,7 +88,7 @@ We assumed:
 - GxE effects simulated as genetic correlation between (the same trait in) the breeds, and
   i.e, between local and exotic environment; we tested different values : 0.6, 0.8, 0.4.
 
-## Simulation of a local and exotic breed 
+## Local and exotic breeds
 
 ##### Code
 
@@ -101,3 +107,31 @@ We assumed
 The Fst value between the two breeds at generation 20 is approximately equal to
 0.3, which is in accordance with the genetic distance between African taurine and
 Asian indicine as reported by Kim et al. (2020) [see citation in our publication].
+
+## Villages and farms
+
+##### Code
+
+    CreateFarmsAndVillages.R
+
+##### Description
+
+In this script, we simulated TODO.
+
+We assumed 
+- TODO
+
+## Crossbreeding - composite "farm bull"
+
+##### Code
+
+    Cross_composite_FB.R
+
+##### Description
+
+In this script, we simulated TODO.
+
+We assumed 
+- TODO
+
+TODO: repeat for the rest or refer to the paper for description of the strategies.
