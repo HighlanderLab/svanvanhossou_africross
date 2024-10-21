@@ -8,16 +8,16 @@ cat("***************** Starting with ", Strategy, " ******************\n")
 HybridOffsprings_v <- vector("list", nVillages)
 names(HybridOffsprings_v) <- paste0("Village", 1:nVillages)
 
-HybridCows_v <- vector("list",nVillages)
+HybridCows_v <- vector("list", nVillages)
 names(HybridCows_v) <- paste0("Village", 1:nVillages)
 
 HybridBulls_v <- vector("list", nVillages)
 names(HybridBulls_v) <- paste0("Village", 1:nVillages)
 
-HybridRefPop_v <- vector("list",nVillages)
+HybridRefPop_v <- vector("list", nVillages)
 names(HybridRefPop_v) <- paste0("Village", 1:nVillages)
 
-Candidates_v <- vector("list",nVillages)
+Candidates_v <- vector("list", nVillages)
 names(Candidates_v) <- paste0("Village", 1:nVillages)
 
 #Create object to store populations at farm level
@@ -35,15 +35,16 @@ cat("----------------- Currently at Generation ", Gen, "-----------------\n")
 for (v in 1:nVillages) {
   #create bull index to randomly assigned one bull to each farm within the Village
   Bindex <- sample(1:nBull_v, nFarms_v, replace=T)
+	
   for (f in 1:nFarms_v) {
     cat("Working on Farm ", f, " in Village ", v, "\n")
     HybridOffsprings_f[[v]][[f]] <- randCross2(females = LocalCows_f[[v]][[f]], males = ExoticBulls20_v[[v]][Bindex[f]],
                                                nCrosses = nInd(LocalCows_f[[v]][[f]]))
-    HybridOffsprings_f[[v]][[f]] <- setPheno (HybridOffsprings_f[[v]][[f]], h2 = h2)
+    HybridOffsprings_f[[v]][[f]] <- setPheno(HybridOffsprings_f[[v]][[f]], h2 = h2)
     HybridOffsprings_f[[v]][[f]]@misc <- list(gen = rep(Gen, times = nInd(HybridOffsprings_f[[v]][[f]])))
-    HybridRefPop_f[[v]][[f]]<-  HybridOffsprings_f[[v]][[f]]
+    HybridRefPop_f[[v]][[f]]<- HybridOffsprings_f[[v]][[f]]
     ##select hybrid cows
-        HybridCows_f[[v]][[f]] <- HybridOffsprings_f[[v]][[f]][HybridOffsprings_f[[v]][[f]]@sex== "F"]
+    HybridCows_f[[v]][[f]] <- HybridOffsprings_f[[v]][[f]][HybridOffsprings_f[[v]][[f]]@sex== "F"]
   }
 
   ### Merge populations at Village level
@@ -52,12 +53,12 @@ for (v in 1:nVillages) {
    HybridRefPop_v [[v]] <- mergePops(HybridRefPop_f[[v]])
 
   ###select Bulls at Village level
-   HybridBulls_v[[v]] <-selectInd(HybridOffsprings_v[[v]], nInd = nBull_v, trait = selIndex, b = TraitIndex,  use = "pheno", sex = "M")
+   HybridBulls_v[[v]] <- selectInd(HybridOffsprings_v[[v]], nInd = nBull_v, trait = selIndex, b = TraitIndex,  use = "pheno", sex = "M")
     }
 
   ###Merge overall population
    HybridOffsprings <- mergePops(HybridOffsprings_v)
-   HybridCows <- mergePops( HybridCows_v)
+   HybridCows <- mergePops(HybridCows_v)
    HybridBulls <- mergePops(HybridBulls_v)
 
 #Calculate Inbreeding coeficient and heterosis
@@ -65,16 +66,16 @@ InbredingCoef <- CompCoefInb(pop= HybridOffsprings)
 Heterosis <- calcHeterosis(Localcows, ExoticBulls_Nucleus, HybridOffsprings)
 Heterosis_G <- calcHeterosis_G(Localcows, ExoticBulls_Nucleus, HybridOffsprings)
 
-write.table(Heterosis, file = paste0(cwd,"/Results/Heterosis", ".txt"),
+write.table(Heterosis, file = paste0(cwd, "/Results/Heterosis", ".txt"),
             append = T, row.names = F, col.names = F )
-write.table(Heterosis_G, file = paste0(cwd,"/Results/Heterosis_G", ".txt"),
+write.table(Heterosis_G, file = paste0(cwd, "/Results/Heterosis_G", ".txt"),
             append = T, row.names = F, col.names = F )
 
 #Store the output
  Offs <- c("HybridOffsprings", "HybridBulls", "HybridCows")
 
  for (i in Offs) {
-  SummaryAll <- recordSummary( pop = get(i), year = Gen)
+  SummaryAll <- recordSummary(pop = get(i), year = Gen)
   assign(paste0("Summary_", i), SummaryAll)
  }
 
@@ -88,7 +89,7 @@ for (Gen in 22:40) {
   repeat {
     Vindex <-  sample(1:nVillages, nVillages, replace=F)
     print(Vindex)
-    checks <-  Vindex[V] == V
+    checks <-  Vindex[V] == V #check wether village
     if (all(checks == F)){break}
   }
 
