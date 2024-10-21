@@ -1,23 +1,23 @@
 
-# Synthetic  "Extra-Village Bull"
-Strategy <- "Synthetic _EVB"
+# Synthetic "Extra-Village Bull"
+Strategy <- "Synthetic_EVB"
 
 cat("***************** Starting with ", Strategy, " ******************\n")
 
 ##### -----------------------------Create objects to store farms and Villages populations  ----------------------------
-HybridOffsprings_v = vector("list",nVillages)
+HybridOffsprings_v <- vector("list", nVillages)
 names(HybridOffsprings_v) <- paste0("Village", 1:nVillages)
 
-HybridCows_v = vector("list",nVillages)
+HybridCows_v <- vector("list",nVillages)
 names(HybridCows_v) <- paste0("Village", 1:nVillages)
 
 HybridBulls_v <- vector("list", nVillages)
 names(HybridBulls_v) <- paste0("Village", 1:nVillages)
 
-HybridRefPop_v= vector("list",nVillages)
+HybridRefPop_v <- vector("list",nVillages)
 names(HybridRefPop_v) <- paste0("Village", 1:nVillages)
 
-Candidates_v = vector("list",nVillages)
+Candidates_v <- vector("list",nVillages)
 names(Candidates_v) <- paste0("Village", 1:nVillages)
 
 #Create object to store populations at farm level
@@ -34,13 +34,13 @@ cat("----------------- Currently at Generation ", Gen, "-----------------\n")
 
 for (v in 1:nVillages) {
   #create bull index to randomly assigned one bull to each farm within the Village
-  Bindex <-  sample(1:nBull_v, nFarms_v, replace=T)
+  Bindex <- sample(1:nBull_v, nFarms_v, replace=T)
   for (f in 1:nFarms_v) {
     cat("Working on Farm ", f, " in Village ", v, "\n")
     HybridOffsprings_f[[v]][[f]] <- randCross2(females = LocalCows_f[[v]][[f]], males = ExoticBulls20_v[[v]][Bindex[f]],
                                                nCrosses = nInd(LocalCows_f[[v]][[f]]))
     HybridOffsprings_f[[v]][[f]] <- setPheno (HybridOffsprings_f[[v]][[f]], h2= h2)
-    HybridOffsprings_f[[v]][[f]] <- setMisc(x =  HybridOffsprings_f[[v]][[f]], node = "yearOfBirth", value = Gen)
+    HybridOffsprings_f[[v]][[f]] <- setMisc(x = HybridOffsprings_f[[v]][[f]], node = "yearOfBirth", value = Gen)
     HybridRefPop_f[[v]][[f]]<-  HybridOffsprings_f[[v]][[f]]
     ##select hybrid cows
         HybridCows_f[[v]][[f]] <- HybridOffsprings_f[[v]][[f]][HybridOffsprings_f[[v]][[f]]@sex== "F"]
@@ -52,7 +52,7 @@ for (v in 1:nVillages) {
    HybridRefPop_v [[v]] <- mergePops(HybridRefPop_f[[v]])
 
   ###select Bulls at Village level
-   HybridBulls_v[[v]] <-selectInd(HybridOffsprings_v[[v]], nInd=nBull_v, trait = selIndex, b= TraitIndex,  use = "pheno", sex = "M")
+   HybridBulls_v[[v]] <-selectInd(HybridOffsprings_v[[v]], nInd = nBull_v, trait = selIndex, b = TraitIndex,  use = "pheno", sex = "M")
     }
 
   ###Merge overall population
@@ -66,12 +66,12 @@ Heterosis <- calcHeterosis(Localcows, ExoticBulls_Nucleus, HybridOffsprings)
 Heterosis_G <- calcHeterosis_G(Localcows, ExoticBulls_Nucleus, HybridOffsprings)
 
 write.table(Heterosis, file = paste0(cwd,"/Results/Heterosis", ".txt"),
-            append =T, row.names = F, col.names = F )
+            append = T, row.names = F, col.names = F )
 write.table(Heterosis_G, file = paste0(cwd,"/Results/Heterosis_G", ".txt"),
-            append =T, row.names = F, col.names = F )
+            append = T, row.names = F, col.names = F )
 
 #Store the output
- Offs <-c("HybridOffsprings", "HybridBulls", "HybridCows")
+ Offs <- c("HybridOffsprings", "HybridBulls", "HybridCows")
 
  for (i in Offs) {
   SummaryAll <- recordSummary( pop = get(i), year = Gen)
@@ -86,7 +86,7 @@ for (Gen in 22:40) {
     cat("----------------- Currently at Generation ", Gen, "-----------------\n")
 
 #Randomly sample villages where bulls will be sent
-  V = 1:nVillages
+  V <- 1:nVillages
   repeat {
     Vindex <-  sample(1:nVillages, nVillages, replace=F)
     print(Vindex)
@@ -108,7 +108,7 @@ for (Gen in 22:40) {
 	  #Select hybrid cows
       Candidates_f[[v]][[f]] <- HybridRefPop_f[[v]][[f]][HybridRefPop_f[[v]][[f]]@misc>= Gen - 4]
       HybridCows_f[[v]][[f]] <- selectInd(Candidates_f[[v]][[f]], nInd(Villages[[v]][[f]]),
-                                          trait = selIndex, b= TraitIndex, use ="pheno", sex ="F")
+                                          trait = selIndex, b = TraitIndex, use = "pheno", sex = "F")
        }
 
     ### Merge populations at Village level
@@ -117,8 +117,8 @@ for (Gen in 22:40) {
      HybridRefPop_v[[v]] <-  mergePops(HybridRefPop_f[[v]])
 
     ###select Bulls at Village level
-     Candidates_v[[v]] <- HybridRefPop_v[[v]][HybridRefPop_v[[v]]@misc>= Gen - 1]
-     HybridBulls_v[[v]] <- selectInd( Candidates_v[[v]], nBull_v, trait = selIndex, b= TraitIndex, use ="pheno", sex = "M")
+     Candidates_v[[v]] <- HybridRefPop_v[[v]][HybridRefPop_v[[v]]@misc >= Gen - 1]
+     HybridBulls_v[[v]] <- selectInd( Candidates_v[[v]], nBull_v, trait = selIndex, b = TraitIndex, use = "pheno", sex = "M")
        }
 
  ###Merge overall population
@@ -129,16 +129,16 @@ for (Gen in 22:40) {
     HybridCows <- mergePops( HybridCows_v)
 
 #Calculate Inbreeding coeficient
-InbredingCoef <- CompCoefInb(InbredingCoef , pop= HybridOffsprings)
+InbredingCoef <- CompCoefInb(InbredingCoef , pop = HybridOffsprings)
 
 #Store the outputs
  for (i in Offs) {
   SummaryAll <- recordSummary(data = get(paste0("Summary_", i)), pop = get(i), year = Gen)
    assign(paste0("Summary_", i), SummaryAll)}
   write.table(Heterosis, file = paste0(cwd,"/Results/Heterosis", ".txt"),
-            append =T, row.names = F, col.names = F )
+            append = T, row.names = F, col.names = F )
   write.table(Heterosis_G, file = paste0(cwd,"/Results/Heterosis_G", ".txt"),
-            append =T, row.names = F, col.names = F )
+            append = T, row.names = F, col.names = F )
  }
 
 # Calculate and export average Breeding values and Dominance deviation
@@ -154,11 +154,11 @@ InbredingCoef <- CompCoefInb(InbredingCoef , pop= HybridOffsprings)
  for (i in Offs ) {
    dat <- get(paste0("Summary_", i))
    write.table(dat, file = paste0(cwd,"/Results/Summary_",i, ".txt" ),
-               append =T, row.names = F, col.names = F )
+               append = T, row.names = F, col.names = F )
  }
 
 write.table(InbredingCoef, file = paste0(cwd,"/Results/InbredingCoefs", ".txt"),
-            append =T, row.names = F, col.names = F )
+            append = T, row.names = F, col.names = F )
 
  #Clear environment
  keep(list = InitObjects, sure = T)
