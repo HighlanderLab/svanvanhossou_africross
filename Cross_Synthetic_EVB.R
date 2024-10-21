@@ -6,19 +6,19 @@ cat("***************** Starting with ", Strategy, " ******************\n")
 
 ##### -----------------------------Create objects to store farms and Villages populations  ----------------------------
 HybridOffsprings_v = vector("list",nVillages)
-names(HybridOffsprings_v) = paste0("Village",c(1:nVillages))
+names(HybridOffsprings_v) <- paste0("Village", 1:nVillages)
 
 HybridCows_v = vector("list",nVillages)
-names(HybridCows_v) = paste0("Village",c(1:nVillages))
+names(HybridCows_v) <- paste0("Village", 1:nVillages)
 
-HybridBulls_v <- vector("list",nVillages)
-names(HybridBulls_v) = paste0("Village",c(1:nVillages))
+HybridBulls_v <- vector("list", nVillages)
+names(HybridBulls_v) <- paste0("Village", 1:nVillages)
 
 HybridRefPop_v= vector("list",nVillages)
-names(HybridRefPop_v) = paste0("Village",c(1:nVillages))
+names(HybridRefPop_v) <- paste0("Village", 1:nVillages)
 
 Candidates_v = vector("list",nVillages)
-names(Candidates_v) = paste0("Village",c(1:nVillages))
+names(Candidates_v) <- paste0("Village", 1:nVillages)
 
 #Create object to store populations at farm level
 LocalCows_f <- Villages
@@ -27,11 +27,7 @@ HybridOffsprings_f <- Villages
 HybridRefPop_f <- Villages
 Candidates_f  <- Villages
 
-##################################################################################################################
-#
-##### -------------------------------------- Crossbreeding for Generation 21  ------------------------------------
-#
-##################################################################################################################
+# ---- Crossbreeding for Generation 21 ----
 
 Gen <- 21
 cat("----------------- Currently at Generation ", Gen, "-----------------\n")
@@ -68,6 +64,7 @@ for (v in 1:nVillages) {
 InbredingCoef <- CompCoefInb(pop= HybridOffsprings)
 Heterosis <- calcHeterosis(Localcows, ExoticBulls_Nucleus, HybridOffsprings)
 Heterosis_G <- calcHeterosis_G(Localcows, ExoticBulls_Nucleus, HybridOffsprings)
+
 write.table(Heterosis, file = paste0(cwd,"/Results/Heterosis", ".txt"),
             append =T, row.names = F, col.names = F )
 write.table(Heterosis_G, file = paste0(cwd,"/Results/Heterosis_G", ".txt"),
@@ -75,6 +72,7 @@ write.table(Heterosis_G, file = paste0(cwd,"/Results/Heterosis_G", ".txt"),
 
 #Store the output
  Offs <-c("HybridOffsprings", "HybridBulls", "HybridCows")
+
  for (i in Offs) {
   SummaryAll <- recordSummary( pop = get(i), year = Gen)
   #IndexAll <- recordIndex2( pop = get(i), year = Gen)
@@ -82,11 +80,7 @@ write.table(Heterosis_G, file = paste0(cwd,"/Results/Heterosis_G", ".txt"),
   assign(paste0("Summary_", i), SummaryAll)
  }
 
-##################################################################################################################
-#
-##### ------------------------------------ Crossbreeding for Generation 22-40   ----------------------------------
-#
-##################################################################################################################
+# ---- Crossbreeding for Generation 22-40 ----
 
 for (Gen in 22:40) {
     cat("----------------- Currently at Generation ", Gen, "-----------------\n")
@@ -102,14 +96,14 @@ for (Gen in 22:40) {
 
     for (v in 1:nVillages) {
     #create bull index to randomly assigned one bull to each farm within the Village
-    Bindex <-  sample( 1:nBull_v, nFarms_v, replace=T)
+    Bindex <- sample( 1:nBull_v, nFarms_v, replace=T)
 
     for (f in 1:nFarms_v) {
       cat("Working on Farm ", f, " in Village ", v, "\n")
       HybridOffsprings_f[[v]][[f]] <- randCross2(females = HybridCows_f[[v]][[f]], males = HybridBulls_v[[Vindex[v]]][Bindex[f]],
                                                  nCrosses = nInd(HybridCows_f[[v]][[f]]))
-      HybridOffsprings_f[[v]][[f]] <- setPheno ( HybridOffsprings_f[[v]][[f]], h2=  h2)
-      HybridOffsprings_f[[v]][[f]] <- setMisc(x =  HybridOffsprings_f[[v]][[f]], node = "yearOfBirth", value = Gen)
+      HybridOffsprings_f[[v]][[f]] <- setPheno(HybridOffsprings_f[[v]][[f]], h2=  h2)
+      HybridOffsprings_f[[v]][[f]] <- setMisc(x = HybridOffsprings_f[[v]][[f]], node = "yearOfBirth", value = Gen)
       HybridRefPop_f[[v]][[f]]<- c(HybridRefPop_f[[v]][[f]], HybridOffsprings_f[[v]][[f]])
 	  #Select hybrid cows
       Candidates_f[[v]][[f]] <- HybridRefPop_f[[v]][[f]][HybridRefPop_f[[v]][[f]]@misc>= Gen - 4]
@@ -150,6 +144,7 @@ InbredingCoef <- CompCoefInb(InbredingCoef , pop= HybridOffsprings)
 # Calculate and export average Breeding values and Dominance deviation
  MeanBV_Hybrids <- CalcMeanBV(mergePops(HybridRefPop_v))
  MeanDD_Hybrids <- CalcMeanDD(mergePops(HybridRefPop_v))
+
  write.table(MeanBV_Hybrids, file = paste0(cwd,"/Results/MeanBV_Hybrids", ".txt"),
              append = T, quote = F, sep = "\t",  row.names = F , col.names = F)
  write.table(MeanDD_Hybrids, file = paste0(cwd,"/Results/MeanDD_Hybrids", ".txt"),
@@ -161,6 +156,7 @@ InbredingCoef <- CompCoefInb(InbredingCoef , pop= HybridOffsprings)
    write.table(dat, file = paste0(cwd,"/Results/Summary_",i, ".txt" ),
                append =T, row.names = F, col.names = F )
  }
+
 write.table(InbredingCoef, file = paste0(cwd,"/Results/InbredingCoefs", ".txt"),
             append =T, row.names = F, col.names = F )
 
