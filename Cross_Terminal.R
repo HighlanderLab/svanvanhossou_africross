@@ -211,10 +211,10 @@ for (Gen in 22:40) {
    ExoticBulls_v <- AssignBull_v(ExoticBullsNucleus, nVillages, nBull_v)
    ExoticCowsNucleus <- selectInd(Candidates, nInd = 2000, trait = 1, use = "ebv", sex = "F")
 
-#Calculate Inbreeding coeficient
+# Calculate Inbreeding coeficient
 InbredingCoef <- CompCoefInb(InbredingCoef, pop = HybridOffsprings)
 
-#Store the outputs
+# Store the outputs
   for (i in Offs) {
     SummaryAll <- recordSummary(data = get(paste0("Summary_", i)), pop = get(i), year = Gen)
     assign(paste0("Summary_", i), SummaryAll)}
@@ -234,7 +234,7 @@ write.table(MeanBV_Hybrids, file = paste0(cwd, "/Results/MeanBV_Hybrids", ".txt"
 write.table(MeanDD_Hybrids, file = paste0(cwd, "/Results/MeanDD_Hybrids", ".txt"),
             append = T, quote = F, sep = "\t",  row.names = F , col.names = F)
 
-# ----- Export the Summary outputs
+# ----- Export the Summary outputs ----
 for (i in Offs) {
   dat <- get(paste0("Summary_", i))
   write.table(dat, file = paste0(cwd, "/Results/Summary_", i, ".txt"),
@@ -244,5 +244,5 @@ for (i in Offs) {
 write.table(InbredingCoef, file = paste0(cwd, "/Results/InbredingCoefs", ".txt"),
             append = T, row.names = F, col.names = F)
 
- #Clear environment
+ # Clear environment
  keep(list = InitObjects sure = T)
