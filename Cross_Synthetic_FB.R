@@ -80,7 +80,7 @@ for (i in Offs) {
 # ---- Crossbreeding for Generation 22-40 ----
 
 for (Gen in 22:40) {
-  cat("----------------- Currently at Generation ", Gen, "-----------------\n")
+  cat("**** Currently at Generation ", Gen, "****\n")
 
   for (v in 1:nVillages) {
     for (f in 1:nFarms_v) {
