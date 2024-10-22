@@ -76,9 +76,7 @@ cat("Ratio of dominance variance to phenotypic variance\n")
 print(diag(varD(LocalFounders)/varP(LocalFounders)))
 print(diag(varD(LocalFounders)/varP(LocalFounders)))
 
-# TODO: Is there a reason you wanted to reset the last ID and pedigree or should
-#       SP$resetPed() be removed?
-SP$resetPed()
+# Systematically assign sexes to individuals
 SP$setSexes("yes_sys")
 
 # ---- Evaluate genetic distance between local and exotic founders ----
