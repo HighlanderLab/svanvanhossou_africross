@@ -1,6 +1,6 @@
 
-# Composite "population-wide bull"
-Strategy <- "Composite_PWB"
+# Synthetic "population-wide bull"
+Strategy <- "Synthetic_PWB"
 
 cat("***************** Starting with ", Strategy, " ******************\n")
 
