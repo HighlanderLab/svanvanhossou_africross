@@ -1,7 +1,6 @@
 # ----  Set up the environment ----
 
 options(warn = 1, bitmapType = 'cairo')
-.libPaths("/scratch/agKoenig/vanvanhossous/r_lib")
 
 if (!dir.exists(paste0("./Results"))) {dir.create(paste0("./Results"))}
 
@@ -41,17 +40,17 @@ for (Rep in 1:40) {
 
   # ---- Crossbreeding strategies ----
 
-  # Composite "farm bull"
-  source("Cross_Composite_FB.R")
+  # Synthetic "farm bull"
+  source("Cross_Synthetic_FB.R")
 
-  # Composite "intra-village bull"
-  source("Cross_Composite_IVB.R")
+  # Synthetic "intra-village bull"
+  source("Cross_Synthetic_IVB.R")
 
-  # Composite "extra-village bull"
-  source("Cross_Composite_EVB.R")
+  # Synthetic "extra-village bull"
+  source("Cross_Synthetic_EVB.R")
 
-  # Composite "population-wide bull"
-  source("Cross_Composite_PWB.R")
+  # Synthetic "population-wide bull"
+  source("Cross_Synthetic_PWB.R")
 
   # Rotational
   source("Cross_Rotational.R")
