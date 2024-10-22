@@ -75,6 +75,7 @@ write.table(Heterosis_G, file = paste0(cwd, "/Results/Heterosis_G", ".txt"),
 
 # Store the outputs
  Offs <-c("HybridOffsprings", "HybridBulls", "HybridCows")
+
  for (i in Offs) {
   SummaryAll <- recordSummary( pop = get(i), year = Gen)
   assign(paste0("Summary_", i), SummaryAll)
@@ -150,6 +151,7 @@ InbredingCoef <- CompCoefInb(InbredingCoef, pop = HybridOffsprings)
    write.table(dat, file = paste0(cwd, "/Results/Summary_", i, ".txt"),
                append = T, row.names = F, col.names = F)
  }
+
 write.table(InbredingCoef, file = paste0(cwd, "/Results/InbredingCoefs", ".txt"),
             append = T, row.names = F, col.names = F)
 
