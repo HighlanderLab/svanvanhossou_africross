@@ -2,7 +2,7 @@
 # Synthetic "farm bull"
 Strategy <- "Synthetic_FB"
 
-cat("***************** Starting with ", Strategy, " ******************\n")
+cat("**** Starting with ", Strategy, " ****\n")
 
 # ---- Create objects to store farms and villages populations ----
 
@@ -30,7 +30,7 @@ Candidates2_f  <- Villages
 # ---- Crossbreeding for Generation 21 ----
 
 Gen <- 21
-cat("----------------- Currently at Generation ", Gen, "-----------------\n")
+cat("**** Currently at Generation ", Gen, "****\n")
 
 for (v in 1:nVillages) {
   # Create bull index to randomly assigned one bull to each farm within the Village
