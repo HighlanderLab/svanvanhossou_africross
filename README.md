@@ -20,10 +20,10 @@ The code is organised in different areas as follows:
 - Founder populations,
 - Local and exotic breeds,
 - Villages and farms
-- Crossbreeding - composite "farm bull"
-- Crossbreeding - composite "intra-village bull"
-- Crossbreeding - composite "extra-village bull"
-- Crossbreeding - composite "population-wide bull"
+- Crossbreeding - synthetic "farm bull"
+- Crossbreeding - synthetic "intra-village bull"
+- Crossbreeding - synthetic "extra-village bull"
+- Crossbreeding - synthetic "population-wide bull"
 - Crossbreeding - rotational
 - Crossbreeding - terminal
 
@@ -121,11 +121,11 @@ In this script, we simulated TODO.
 We assumed 
 - TODO
 
-## Crossbreeding - composite "farm bull"
+## Crossbreeding - synthetic "farm bull"
 
 ##### Code
 
-    Cross_composite_FB.R
+    Cross_synthetic_FB.R
 
 ##### Description
 
