@@ -84,7 +84,7 @@ We assumed:
 - all the traits are controlled by the same pleiotropic QTL having correlated effects
 - the same heritability in the two breeds but different phenotypic mean and variance
   in the two breeds, leading to 2 x 2 = 4 simulated traits
-- different genetic correlations between body weight andtick count (0, -0.4, -0.2, 0.2, 0.4)
+- different genetic correlations between body weight and tick count (0, -0.4, -0.2, 0.2, 0.4)
 - GxE effects simulated as genetic correlation between (the same trait in) the breeds, and
   i.e, between local and exotic environment; we tested different values : 0.6, 0.8, 0.4.
 
