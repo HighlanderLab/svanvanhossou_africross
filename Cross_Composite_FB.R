@@ -1,6 +1,6 @@
 
-# Composite "farm bull"
-Strategy <- "Composite_FB"
+# Synthetic "farm bull"
+Strategy <- "Synthetic_FB"
 
 cat("***************** Starting with ", Strategy, " ******************\n")
 
