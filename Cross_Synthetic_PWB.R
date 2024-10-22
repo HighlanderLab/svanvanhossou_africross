@@ -41,6 +41,7 @@ for (v in 1:nVillages) {
     HybridOffsprings_f[[v]][[f]] <- randCross2(females = LocalCows_f[[v]][[f]], males = ExoticBulls20_v[[v]][Bindex[f]],
                                                nCrosses = nInd(LocalCows_f[[v]][[f]]))
     HybridOffsprings_f[[v]][[f]] <- setPheno (HybridOffsprings_f[[v]][[f]], h2= h2)
+    #HybridOffsprings_f[[v]][[f]]@misc <- list(gen = rep(Gen, times = nInd(HybridOffsprings_f[[v]][[f]])))
     HybridOffsprings_f[[v]][[f]] <- setMisc(x =  HybridOffsprings_f[[v]][[f]], node = "yearOfBirth", value = Gen)
     HybridRefPop_f[[v]][[f]]<-  HybridOffsprings_f[[v]][[f]]
     ##select hybrid cows
