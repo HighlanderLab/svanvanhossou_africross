@@ -1,6 +1,6 @@
 
-# Composite "intra-village bull"
-Strategy <- "Composite_IVB"
+# Synthetic "intra-village bull"
+Strategy <- "Synthetic_IVB"
 
 cat("***************** Starting with ", Strategy, " ******************\n")
 
