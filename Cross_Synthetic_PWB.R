@@ -17,7 +17,7 @@ names(HybridBulls_v) <- paste0("Village", c(1:nVillages))
 HybridRefPop_v <- vector("list", nVillages)
 names(HybridRefPop_v) <- paste0("Village", c(1:nVillages))
 
-#Create object to store populations at farm level
+# Create object to store populations at farm level
 LocalCows_f <- Villages
 HybridCows_f <- Villages
 HybridOffsprings_f <- Villages
@@ -148,8 +148,9 @@ InbredingCoef <- CompCoefInb(InbredingCoef, pop = HybridOffsprings)
    write.table(dat, file = paste0(cwd, "/Results/Summary_", i, ".txt"),
                append = T, row.names = F, col.names = F)
  }
+
 write.table(InbredingCoef, file = paste0(cwd, "/Results/InbredingCoefs", ".txt"),
             append = T, row.names = F, col.names = F)
 
- #Clear environment
+ # Clear environment
  keep(list = InitObjects, sure = T)
