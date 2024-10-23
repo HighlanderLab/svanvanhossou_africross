@@ -57,6 +57,8 @@ DomVarDD  <- c(1.0, 1.3, 1.0, 1.3)
 
 nVillages <-10
 nFarms <- 200
+nMinCows_f <- 8 # Minimum number of cows per farm
+nMaxCows_f <- 40 # Maximum number of cows per farm
 nBull_v <- 5 # Number of selected bulls per village. Artificial insemination is assumed.
 nFarms_v <- nFarms/nVillages
 
