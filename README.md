@@ -76,7 +76,7 @@ In this script we used values from `SimParameters.R` and simulated:
   we tracked 300 QTL and 1400 SNP on each chromosome.
 - two complex traits with additive and dominance genetic effects:
   - body weight (productive trait with moderate heritability) and
-  - tick count (adaptive trait with low heritability).
+  - tick count incidence (i.e., `-log10[tick count]`, adaptive trait with low heritability).
 
 We assumed: 
 - a population split 20.000 generations ago corresponding to 100.000 years split
@@ -84,7 +84,7 @@ We assumed:
 - all the traits are controlled by the same pleiotropic QTL having correlated effects
 - the same heritability in the two breeds but different phenotypic mean and variance
   in the two breeds, leading to 2 x 2 = 4 simulated traits
-- different genetic correlations between body weight and tick count (0, -0.4, -0.2, 0.2, 0.4)
+- different genetic correlations between body weight and tick count incidence (0, -0.4, -0.2, 0.2, 0.4)
 - GxE effects simulated as genetic correlation between (the same trait in) the breeds, and
   i.e, between local and exotic environment; we tested different values : 0.6, 0.8, 0.4.
 
@@ -101,7 +101,7 @@ local and exotic breeds separately to generate trait-specific linkage-disequilib
 in each breed.
 
 We assumed 
-- phenotypic selection targeting (lower) tick count for the local breed
+- phenotypic selection targeting (lower) tick count incidence for the local breed
 - genomic selection targeting (higher) body weight for the exotic breed.
 
 The Fst value between the two breeds at generation 20 is approximately equal to
@@ -138,10 +138,10 @@ In this script, we simulated synthetic breeding following the farm bull scheme.
 - A first generation of crossbred animals (G21) were produced by mating local cows
   from the smallholder farms with exotic bulls.
 - One crossbred bull was selected per farm and mated with crossbred cows from the same farm to produce
-  offspring over 19 subsequent generations (implying closed matings of relatives at the farm level)
+  offsprings over 19 subsequent generations (implying closed matings of relatives at the farm level)
 
 We assumed 
-- phenotypic selection of d its mating with cows 
+- phenotypic selection using a multi-trait selection index including body weight and tick count incidence for the crossbred animals (see `SimParameters.R`) 
   
 
 ## Crossbreeding - synthetic "intra-village bull"
