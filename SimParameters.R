@@ -13,9 +13,9 @@ nSplit <- 20000
 
 # The traits are:
 #   - BodyWeight_local
-#   - TickCount_local
+#   - TickCountIncidence_local
 #   - BodyWeight_exotic
-#   - TickCount_exotic
+#   - TickCountIncidence_exotic
 
 # Additive variation first
 h2 <- c(0.3, 0.1, 0.3, 0.1)
@@ -25,7 +25,7 @@ AdditVar <- PhenoVar*(h2)
 
 # ---- Correlations ----
 
-# Genetic correlation (rg) between BodyWeight and TickCount in the same breed.
+# Genetic correlation (rg) between BodyWeight and TickCountIncidence in the same breed.
 # Different rg were tested.
 CorA <- -0.4
 # CorA <- -0.2
@@ -49,7 +49,7 @@ TraitCor <- matrix(c(1,         CorA,      CorE,      CorA*CorE,
 # ---- Dominance ----
 
 # The expected proportion of dominance variance (VD) to phenotype variance (VP) is:
-# 0.1 for Body weight and 0.04 for Tickcount
+# 0.1 for Body weight and 0.04 for TickCountIncidence
 DomMeanDD <- c(0.18, 0.08, 0.18, 0.08)
 DomVarDD  <- c(1.0, 1.3, 1.0, 1.3)
 
