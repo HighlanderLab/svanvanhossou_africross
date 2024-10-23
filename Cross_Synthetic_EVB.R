@@ -1,5 +1,5 @@
 
-# Synthetic "extra-village bull"
+# Synthetic "exchanged-village bull"
 Strategy <- "Synthetic_EVB"
 
 cat("**** Starting with ", Strategy, " ****\n")
