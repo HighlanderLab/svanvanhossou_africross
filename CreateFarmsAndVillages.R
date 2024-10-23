@@ -30,7 +30,7 @@ for (i in (1:length(Farms))) { # For each Farm
 
 # ---- Create Villages ----
 
-# create list of villages
+# Create list of villages
 Villages <- vector("list", nVillages)
 names(Villages) <- paste0("Village", c(1:nVillages))
 
