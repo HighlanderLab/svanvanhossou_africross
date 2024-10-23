@@ -116,16 +116,13 @@ Asian indicine as reported by Kim et al. (2020) [see citation in our publication
 
 ##### Description
 
-In this script, we used values from `SimParameters.R` and simulated smallholder farms located 
-in different villages. We selected cows from generation 20 of the local breed and randomly 
-assigned them to the smallholder farms. The number of cows per farm (farm sizes) were randomly 
-sampled, and therefore varied between replicates. Subsequently, we simulated villages and 
-randomly allocated the farms to them. Finally, we selected bulls from generation 20 of 
-the local and exotic breed respectively, and assigned them to the villages.
+In this script, we used values from `SimParameters.R` and simulated smallholder farms and villages. 
+- Farms were simulated by randomly sampling cows from generation 20 of the local breed. 
+- The villages were randomly assigned the simulated farms, and local and exotic bulls from generation 20.
 
 We assumed 
 - 200 smallholders farms
-- eight to 40 cows per farm 
+- eight to 40 cows randomly sampled per farm (hence, farm size varied between replicates)
 - 10 villages (each composed of 20 smallholders farms)
 - 5 bulls per village (assuming artificial insemination).
 
