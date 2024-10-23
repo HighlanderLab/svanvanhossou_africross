@@ -137,8 +137,7 @@ We assumed
 In this script, we simulated synthetic breeding following the farm bull scheme. 
 - A first generation of crossbred animals (G21) were produced by mating local cows
   from the smallholder farms with exotic bulls.
-- One crossbred bull was selected per farm and mated with crossbred cows from the same farm
-  to produce offspring over 19 subsequent generations (implying closed matings of relatives at the farm level)
+- One crossbred bull was selected per farm and mated with crossbred cows from the same farm to produce offspring over 19 subsequent generations (implying closed matings of relatives at the farm level)
 
 We assumed 
 - phenotypic selection of d its mating with cows 
