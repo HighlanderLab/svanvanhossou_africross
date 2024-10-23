@@ -199,7 +199,7 @@ In this script, we simulated synthetic breeding following the "population-wide b
 - The 50 best bulls were selected and randomly assigned to the farms regardless of their
   initial farm and village origin
   - all candidate crossbred bulls from the simulated smallholder farms were pooled together.
-  - this strategie implyed variable number of selected bulls per village (in contrast to
+  - this strategy implyed variable number of selected bulls per village (in contrast to
     the other synthetic schemes). 
 
 We assumed 
