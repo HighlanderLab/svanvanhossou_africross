@@ -236,7 +236,7 @@ We assumed
 
 ##### Code
 
-In this script, we simulated the production of F1 (terminal) animals over 20 generations. 
+In this script, we simulated the production of F1 animals over 20 generations. 
 - local cows from smallholder farms were mated with exotic bulls to produce F1 animals at each generation.
 
 We assumed 
