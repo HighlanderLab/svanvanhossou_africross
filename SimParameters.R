@@ -36,9 +36,9 @@ CorA <- -0.4
 # Genetic correlation between the same trait (e.g. BodyWeight) in the two breeds
 # (as environmental correlation).
 # Different GxE were tested
-CorE <- 0.6
-# CorE <- 0.4
-# CorE <- 0.8 (considered as absence of GxE effects)
+CorE <- 0.4 # (Strong GxE effects)
+# CorE <- 0.6 # (Moderate GxE effects)
+# CorE <- 0.8 # (Limited GxE effects)
 
 TraitCor <- matrix(c(1,         CorA,      CorE,      CorA*CorE,
                      CorA,      1,         CorA*CorE, CorE,
