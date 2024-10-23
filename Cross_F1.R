@@ -1,6 +1,6 @@
 
-# Terminal
-Strategy <- "Terminal"
+# F1 (Terminal)
+Strategy <- "F1"
 
 cat("**** Starting with ", Strategy, " ****\n")
 
