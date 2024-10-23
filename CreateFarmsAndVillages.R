@@ -9,7 +9,7 @@ names(Farms) <- paste0("Farm", c(1:nFarms))
 
 # Sample farm size
 repeat {
-  cowSizes <- sample(8:40, size = nFarms, replace = TRUE)
+  cowSizes <- sample(FS_min:FS_max, size = nFarms, replace = TRUE)
   print(sum(cowSizes))
   if (sum(cowSizes) > 4000 & sum(cowSizes) < 5000) {
     break
