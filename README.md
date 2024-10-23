@@ -141,7 +141,8 @@ In this script, we simulated synthetic breeding following the farm bull scheme.
   offsprings over 19 subsequent generations (implying closed matings of relatives at the farm level)
 
 We assumed 
-- phenotypic selection using a multi-trait selection index including body weight and tick count incidence for the crossbred animals (see `SimParameters.R`) 
+- phenotypic selection using a multi-trait selection index including body weight and tick count incidence
+  for the crossbred animals (see `SimParameters.R`) 
   
 
 ## Crossbreeding - synthetic "intra-village bull"
@@ -152,10 +153,16 @@ We assumed
 
 ##### Description
 
-In this script, we simulated TODO.
+In this script, we simulated synthetic breeding following the intra-village bull scheme. 
+- A first generation of crossbred animals (G21) were produced by mating local cows
+  from the smallholder farms with exotic bulls.
+- Five best crossbred bulls in a village v<sub>i</sub> were selected and randomly allocated
+  to farms located in the same village (v<sub>i</sub>). 
 
 We assumed 
-- TODO
+- phenotypic selection using a multi-trait selection index including body weight and tick
+  count incidence for the crossbred animals (see `SimParameters.R`).
+- a cooperation between farmers from the same village for the exchanges of semen. 
 
   ## Crossbreeding - synthetic "exchanged-village bull"
 
@@ -165,10 +172,17 @@ We assumed
 
 ##### Description
 
-In this script, we simulated TODO.
+In this script, we simulated synthetic breeding following the intra-village bull scheme. 
+- A first generation of crossbred animals (G<sub>21</sub> ) were produced by mating local 
+  cows from the smallholder farms with exotic bulls.
+- Five best crossbred bulls in a village v<sub>i</sub> were selected and randomly allocated
+  to farms located in another village v<sub>j</sub>. The village v<sub>j</sub> was randomly
+  chosen at each generation and should differed from v<sub>i</sub>.   
 
 We assumed 
-- TODO
+- phenotypic selection using a multi-trait selection index including body weight and tick
+  count incidence for the crossbred animals (see `SimParameters.R`).
+- a cooperation between farmers from different villages for the exchanges of semen among villages. 
 
   
   ## Crossbreeding - synthetic "population-wide bull"
@@ -179,10 +193,16 @@ We assumed
 
 ##### Description
 
-In this script, we simulated TODO.
+In this script, we simulated synthetic breeding following the intra-village bull scheme. 
+- A first generation of crossbred animals (G<sub>21</sub> ) were produced by mating local 
+  cows from the smallholder farms with exotic bulls.
+- all candidate crossbred bulls from the simulated smallholder farms were pooled together.
+  The 50 best bulls were selected and randomly assigned to the farms regardless of their
+  initial farm and village origin (implying variable number of selected bulls per village. 
 
 We assumed 
-- TODO
+- phenotypic selection using a multi-trait selection index including body weight and tick
+  count incidence for the crossbred animals (see `SimParameters.R`).
 
   
   ## Crossbreeding - Rotational
