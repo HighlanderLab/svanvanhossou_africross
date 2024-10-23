@@ -121,11 +121,11 @@ in different villages. We selected cows from generation 20 of the local breed an
 assigned them to the smallholder farms. The number of cows per farm (farm sizes) were randomly 
 sampled, and therefore varied between replicates. Subsequently, we simulated villages and 
 randomly allocated the farms to them. Finally, we selected bulls from generation 20 of 
-the local and exotoc breed respectively, and assigned them to the villages.
+the local and exotic breed respectively, and assigned them to the villages.
 
 We assumed 
 - 200 smallholders farms
-- eight to 40 cows per farms 
+- eight to 40 cows per farm 
 - 10 villages (each composed of 20 smallholders farms)
 - 5 bulls per village (assuming artificial insemination).
 
