@@ -134,7 +134,7 @@ We assumed
 
 ##### Description
 
-In this script, we simulated synthetic breeding following the farm bull scheme. 
+In this script, we simulated synthetic breeding following the "farm bull" scheme. 
 - A first generation of crossbred animals (G21) were produced by mating local cows
   from the smallholder farms with exotic bulls.
 - One crossbred bull was selected per farm and mated with crossbred cows from the same farm to produce
@@ -142,7 +142,7 @@ In this script, we simulated synthetic breeding following the farm bull scheme.
 
 We assumed 
 - phenotypic selection using a multi-trait selection index including body weight and tick count incidence
-  for the crossbred animals (see `SimParameters.R`) 
+  for the crossbred cows and bulls (see `SimParameters.R`) 
   
 
 ## Crossbreeding - synthetic "intra-village bull"
@@ -153,7 +153,7 @@ We assumed
 
 ##### Description
 
-In this script, we simulated synthetic breeding following the intra-village bull scheme. 
+In this script, we simulated synthetic breeding following the "intra-village bull" scheme. 
 - A first generation of crossbred animals (G21) were produced by mating local cows
   from the smallholder farms with exotic bulls.
 - Five best crossbred bulls in a village v<sub>i</sub> were selected and randomly allocated
@@ -161,7 +161,7 @@ In this script, we simulated synthetic breeding following the intra-village bull
 
 We assumed 
 - phenotypic selection using a multi-trait selection index including body weight and tick
-  count incidence for the crossbred animals (see `SimParameters.R`).
+  count incidence for the crossbred cows and bulls (see `SimParameters.R`).
 - a cooperation between farmers from the same village for the exchanges of semen. 
 
   ## Crossbreeding - synthetic "exchanged-village bull"
@@ -172,16 +172,16 @@ We assumed
 
 ##### Description
 
-In this script, we simulated synthetic breeding following the intra-village bull scheme. 
+In this script, we simulated synthetic breeding following the "exchanged-village bull" scheme. 
 - A first generation of crossbred animals (G<sub>21</sub> ) were produced by mating local 
   cows from the smallholder farms with exotic bulls.
 - Five best crossbred bulls in a village v<sub>i</sub> were selected and randomly allocated
-  to farms located in another village v<sub>j</sub>. The village v<sub>j</sub> was randomly
-  chosen at each generation and should differed from v<sub>i</sub>.   
+  to farms located in another village v<sub>j</sub>.
+  - The village v<sub>j</sub> was randomly chosen at each generation and should differed from v<sub>i</sub>.   
 
 We assumed 
 - phenotypic selection using a multi-trait selection index including body weight and tick
-  count incidence for the crossbred animals (see `SimParameters.R`).
+  count incidence for the crossbred cows and bulls (see `SimParameters.R`).
 - a cooperation between farmers from different villages for the exchanges of semen among villages. 
 
   
@@ -193,16 +193,18 @@ We assumed
 
 ##### Description
 
-In this script, we simulated synthetic breeding following the intra-village bull scheme. 
+In this script, we simulated synthetic breeding following the "population-wide bull" scheme. 
 - A first generation of crossbred animals (G<sub>21</sub> ) were produced by mating local 
   cows from the smallholder farms with exotic bulls.
-- all candidate crossbred bulls from the simulated smallholder farms were pooled together.
-  The 50 best bulls were selected and randomly assigned to the farms regardless of their
-  initial farm and village origin (implying variable number of selected bulls per village. 
+- The 50 best bulls were selected and randomly assigned to the farms regardless of their
+  initial farm and village origin
+  - all candidate crossbred bulls from the simulated smallholder farms were pooled together.
+  - this strategie implyed variable number of selected bulls per village (in contrast to
+    the other synthetic schemes). 
 
 We assumed 
 - phenotypic selection using a multi-trait selection index including body weight and tick
-  count incidence for the crossbred animals (see `SimParameters.R`).
+  count incidence for the crossbred cows and bulls (see `SimParameters.R`).
 
   
   ## Crossbreeding - Rotational
@@ -213,21 +215,38 @@ We assumed
 
 ##### Description
 
-In this script, we simulated TODO.
+In this script, we simulated Rotational crossbreeding. 
+- A first generation of crossbred animals (G<sub>21</sub> ) were produced by mating local 
+  cows from the smallholder farms with exotic bulls.
+- Crossbred cows from the smallholder farms were mated with local and exotic bulls at even
+  and odd generations, respectively, to produce crossbred offsprings over 19 subsequent generations.
 
 We assumed 
-- TODO
+- a local nucleus herd of 2000 cows delivering semen from 50 local bulls to the smallholder farms.
+  - The local nucleus herd also serve at preserving the local breed for its adaptive traits.
+- an exotic nucleus herd (a foreign herd) of 2000 cows delivering semen from 50 exotic bulls
+  to the smallholder farms.
+- phenotypic selection using a multi-trait selection index including body weight and tick
+  count incidence for the crossbred cows (see `SimParameters.R`).
+- phenotypic selection targeting (lower) tick count incidence for the local breed
+- genomic selection targeting (higher) body weight for the exotic breed.
 
   
-  ## Crossbreeding - Terminal
+  ## Crossbreeding - F1
 
 ##### Code
 
-    Cross_Terminal.R
-
-##### Description
-
-In this script, we simulated TODO.
+In this script, we simulated the production of F1 (terminal) animals over 20 generations. 
+- local cows from smallholder farms were mated with exotic bulls to produce F1 animals at each generation.
 
 We assumed 
-- TODO
+- a pure line of local animals was kept in each smallholder farm, in parallel to the crossbreeding scheme. 
+  - Each local cow were mated twice: with an exotic bull to produced a F1 offspring, and with a local bull
+  to produce a local offspring.
+  - The local cows and bulls were selected from the local progenies to serve as parents for the next generation.
+  - This strategy ensure the availability of local cows at each generation for ongoing production of F1 animals
+    on the smallholder farms (but is not feasible in practical setting)
+- an exotic nucleus herd (a foreign herd) of 2000 cows delivering semen from 50 exotic bulls
+  to the smallholder farms.
+- phenotypic selection targeting (lower) tick count incidence for the local animals
+- genomic selection targeting (higher) body weight for the exotic breed.
