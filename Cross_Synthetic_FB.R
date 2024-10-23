@@ -18,7 +18,7 @@ names(HybridBulls_v) <- paste0("Village", 1:nVillages)
 HybridRefPop_v <- vector("list", nVillages)
 names(HybridRefPop_v) <- paste0("Village", 1:nVillages)
 
-# Create object to store populations at farm level
+# Create objects to store populations at farm level
 LocalCows_f <- Villages
 HybridCows_f <- Villages
 HybridBulls_f <- Villages
