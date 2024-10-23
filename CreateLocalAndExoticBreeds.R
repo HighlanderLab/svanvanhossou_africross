@@ -43,7 +43,7 @@ for (Gen in 1:20) {
   }
 }
 
-# save local population at Generation 20
+# Save local population at Generation 20
 LocalCows_Nucleus <- selectInd(LocalCows[LocalCows@misc$gen != 20],
                                nInd = 2000, trait = "TickCount_local", use = "pheno", sex = "F")
 LocalBulls_Nucleus <- selectInd(LocalBulls, nInd = nBull_v*nVillages, trait = "TickCount_local",
