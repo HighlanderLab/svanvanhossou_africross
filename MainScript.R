@@ -55,6 +55,6 @@ for (Rep in 1:40) {
   # Rotational
   source("Cross_Rotational.R")
 
-  # Terminal
-  source("Cross_Terminal.R")
+  # F1 (Terminal)
+  source("Cross_F1.R")
 }
