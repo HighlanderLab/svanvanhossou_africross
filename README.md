@@ -139,4 +139,70 @@ In this script, we simulated TODO.
 We assumed 
 - TODO
 
-TODO: repeat for the rest or refer to the paper for description of the strategies.
+## Crossbreeding - synthetic "intra-village bull"
+
+##### Code
+
+    Cross_synthetic_IVB.R
+
+##### Description
+
+In this script, we simulated TODO.
+
+We assumed 
+- TODO
+
+  ## Crossbreeding - synthetic "exchanged-village bull"
+
+##### Code
+
+    Cross_synthetic_EVB.R
+
+##### Description
+
+In this script, we simulated TODO.
+
+We assumed 
+- TODO
+
+  
+  ## Crossbreeding - synthetic "population-wide bull"
+
+##### Code
+
+    Cross_synthetic_PWB.R
+
+##### Description
+
+In this script, we simulated TODO.
+
+We assumed 
+- TODO
+
+  
+  ## Crossbreeding - Rotational
+
+##### Code
+
+    Cross_Rotational.R
+
+##### Description
+
+In this script, we simulated TODO.
+
+We assumed 
+- TODO
+
+  
+  ## Crossbreeding - Terminal
+
+##### Code
+
+    Cross_Terminal.R
+
+##### Description
+
+In this script, we simulated TODO.
+
+We assumed 
+- TODO
