@@ -122,7 +122,7 @@ In this script, we used values from `SimParameters.R` and simulated smallholder 
 
 We assumed 
 - 200 smallholders farms
-- eight to 40 cows randomly sampled per farm (hence, farm size varied between replicates)
+- eight to 40 cows per farm (farm size were randomly sampled, and therefore varied between replicates)
 - 10 villages (each composed of 20 smallholders farms)
 - 5 bulls per village (assuming artificial insemination).
 
