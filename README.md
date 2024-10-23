@@ -25,7 +25,7 @@ The code is organised in different areas as follows:
 - Crossbreeding - synthetic "extra-village bull"
 - Crossbreeding - synthetic "population-wide bull"
 - Crossbreeding - rotational
-- Crossbreeding - terminal
+- Crossbreeding - F1
 
 The rest of this document provides a brief description of each area.
 
