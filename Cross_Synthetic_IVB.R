@@ -5,6 +5,8 @@ Strategy <- "Synthetic_IVB"
 cat("*** Starting with", Strategy, "***n")
 
 # ---- Create objects to store farms and villages populations ----
+
+# Create objects to store populations at village level
 HybridOffsprings_v <- vector("list", nVillages)
 names(HybridOffsprings_v) <- paste0("Village", c(1:nVillages))
 
