@@ -19,7 +19,7 @@ RefLocalPop <- LocalFounders
 
 # Random mating and animal selection
 # Phenotypic selection focusing on the trait "TickCount_local"
-# 100 bulls are selected within the last two generations (bulls are used for max.2 generations)
+# 100 bulls are selected within the last two generations (bulls are used for max. 2 generations)
 # From generation 0 to 4 no selection of cows were applied to increase the population size of the local breed to 10.000 breeding females
 # From generation 5, 10.000 females are selected within animal from the last 5 generations (cows are used for max. 5 generations)
 
