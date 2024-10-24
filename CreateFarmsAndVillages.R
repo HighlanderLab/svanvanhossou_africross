@@ -11,8 +11,8 @@ names(Farms) <- paste0("Farm", c(1:nFarms))
 repeat {
   cowSizes <- sample(nMinCows_f:nMaxCows_f, size = nFarms, replace = TRUE)
   print(sum(cowSizes))
-  if (sum(cowSizes) > 4000 & sum(cowSizes) < 5000) {
-    break
+  if (sum(cowSizes) > 4000 & sum(cowSizes) < 5000) { # Optional: ensure that most of the simulated local 
+    break                                            # cows from generation 20 are further used.
   }
 }
 
@@ -50,6 +50,6 @@ ExoticBulls20_v <- AssignBull_v(ExoticBulls_Nucleus, nVillages, nBull_v)
 # Local Breed
 LocalBulls20_v <- AssignBull_v(LocalBulls_Nucleus, nVillages, nBull_v)
 
-# List of R objects before Crossbreeding
+# List of R objects before Crossbreeding (used to reset the R environment after each crossbreeding scenario)
 InitObjects <- ls()
 InitObjects <- c(InitObjects, "InitObjects")
