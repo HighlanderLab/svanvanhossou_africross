@@ -93,7 +93,7 @@ for (Gen in 22:40) {
   repeat {
     Vindex <- sample(1:nVillages, nVillages, replace = FALSE)
     print(Vindex) #  the index that determines the allocation of bulls to the villages. 
-    checks <-  Vindex[V] == V # Check whether village Index is different from the initial village ID
+    checks <-  Vindex[V] == V # Check whether village indexes are different from the initial village IDs
     if (all(checks == FALSE)) { # (ensure the exchange of bulls between villages)
       break
     }
