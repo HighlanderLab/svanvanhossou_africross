@@ -48,7 +48,7 @@ for (v in 1:nVillages) {
     HybridBulls_f[[v]][[f]] <- selectInd(HybridOffsprings_f[[v]][[f]], nInd = 1, sex = "M",
                                          trait = selIndex, b = TraitIndex,use = "pheno")
   }
-  
+
   # Merge populations at Village level
   HybridOffsprings_v[[v]] <- mergePops(HybridOffsprings_f[[v]])
   HybridCows_v[[v]] <- mergePops(HybridCows_f[[v]])
@@ -65,9 +65,9 @@ HybridCows <- mergePops( HybridCows_v)
 InbredingCoef <- CompCoefInb(pop= HybridOffsprings)
 Heterosis <- calcHeterosis(Localcows, ExoticBulls_Nucleus, HybridOffsprings)
 Heterosis_G <- calcHeterosis_G(Localcows, ExoticBulls_Nucleus, HybridOffsprings)
-write.table(Heterosis, file = paste0(cwd, "Results/Heterosis", ".txt"),
+write.table(Heterosis, file = paste0(cwd, "/Results/Heterosis", ".txt"),
             append = TRUE, row.names = FALSE, col.names = FALSE)
-write.table(Heterosis_G, file = paste0(cwd, "Results/Heterosis_G", ".txt"),
+write.table(Heterosis_G, file = paste0(cwd, "/Results/Heterosis_G", ".txt"),
             append = TRUE, row.names =FALSE, col.names = FALSE)
 
 # Store the outputs
@@ -101,14 +101,14 @@ for (Gen in 22:40) {
       HybridBulls_f[[v]][[f]] <- selectInd(Candidates2_f[[v]][[f]], nInd = 1, sex = "M",
                                            trait = selIndex, b = TraitIndex,  use = "pheno")
     }
-    
+
     # Merge populations at Village level
     HybridCows_v[[v]] <- mergePops(HybridCows_f[[v]])
     HybridBulls_v[[v]] <- mergePops(HybridBulls_f[[v]])
     HybridOffsprings_v[[v]] <- mergePops(HybridOffsprings_f[[v]])
     HybridRefPop_v[[v]] <-  mergePops(HybridRefPop_f[[v]])
   }
-  
+
   # Merge overall population
   HybridOffsprings <- mergePops(HybridOffsprings_v)
   Heterosis <- calcHeterosis(HybridCows, HybridBulls, HybridOffsprings)
@@ -124,10 +124,10 @@ for (Gen in 22:40) {
     SummaryAll <- recordSummary(data = get(paste0("Summary_", i)), pop = get(i), year = Gen)
     assign(paste0("Summary_", i), SummaryAll)
   }
-  
-  write.table(Heterosis, file = paste0(cwd, "Results/Heterosis", ".txt"),
+
+  write.table(Heterosis, file = paste0(cwd, "/Results/Heterosis", ".txt"),
               append = TRUE, row.names = FALSE, col.names = FALSE)
-  write.table(Heterosis_G, file = paste0(cwd, "Results/Heterosis_G", ".txt"),
+  write.table(Heterosis_G, file = paste0(cwd, "/Results/Heterosis_G", ".txt"),
               append = TRUE, row.names = FALSE, col.names = FALSE)
 }
 
@@ -135,20 +135,20 @@ for (Gen in 22:40) {
 MeanBV_Hybrids <- CalcMeanBV(mergePops(HybridRefPop_v))
 MeanDD_Hybrids <- CalcMeanDD(mergePops(HybridRefPop_v))
 
-write.table(MeanBV_Hybrids, file = paste0(cwd, "Results/MeanBV_Hybrids", ".txt"),
+write.table(MeanBV_Hybrids, file = paste0(cwd, "/Results/MeanBV_Hybrids", ".txt"),
             append = TRUE, quote = FALSE, sep = "\t",  row.names = FALSE, col.names = FALSE)
-write.table(MeanDD_Hybrids, file = paste0(cwd, "Results/MeanDD_Hybrids", ".txt"),
+write.table(MeanDD_Hybrids, file = paste0(cwd, "/Results/MeanDD_Hybrids", ".txt"),
             append = TRUE, quote = FALSE, sep = "\t",  row.names = FALSE, col.names = FALSE)
 
 # ---- Export the Summary outputs ----
 
 for (i in Offs) {
   dat <- get(paste0("Summary_", i))
-  write.table(dat, file = paste0(cwd, "Results/Summary_", i, ".txt"),
+  write.table(dat, file = paste0(cwd, "/Results/Summary_", i, ".txt"),
               append = TRUE, row.names = FALSE, col.names = FALSE)
 }
 
-write.table(InbredingCoef, file = paste0(cwd, "Results/InbredingCoefs", ".txt"),
+write.table(InbredingCoef, file = paste0(cwd, "/Results/InbredingCoefs", ".txt"),
             append = TRUE, row.names = FALSE, col.names = FALSE)
 
 # Clear environment
