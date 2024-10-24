@@ -6,6 +6,7 @@ cat("*** Starting with ", Strategy, "***n")
 
 # ---- Create objects to store farms and villages populations ----
 
+# Create objects to store populations at village level
 HybridOffsprings_v <- vector("list", nVillages)
 names(HybridOffsprings_v) <- paste0("Village", c(1:nVillages))
 
@@ -54,7 +55,7 @@ for (v in 1:nVillages) {
 
 # Merge overall population
 HybridOffsprings <- mergePops(HybridOffsprings_v)
-HybridCows <- mergePops( HybridCows_v)
+HybridCows <- mergePops(HybridCows_v)
 
 # Select bulls at population wide level
 HybridBulls <- selectInd(HybridOffsprings, nInd = nBull_v*nVillages, sex = "M",
@@ -86,7 +87,7 @@ for (Gen in 22:40) {
 
   for (v in 1:nVillages) {
     # Create bull index to randomly assigned one bull to each farm within the Village
-    Bindex <-  sample( 1:nBull_v, nFarms_v, replace = TRUE)
+    Bindex <-  sample(1:nBull_v, nFarms_v, replace = TRUE)
 
     for (f in 1:nFarms_v) {
       cat("Working on Farm ", f, " in Village ", v, "\n")
@@ -113,7 +114,7 @@ HybridOffsprings <- mergePops(HybridOffsprings_v)
 Heterosis <- calcHeterosis(HybridCows, HybridBulls, HybridOffsprings)
 Heterosis_G <- calcHeterossis_G(HybridCows, HybridBulls, HybridOffsprings)
 HybridRefPop <- mergePops(HybridRefPop_v)
-HybridCows <- mergePops( HybridCows_v)
+HybridCows <- mergePops(HybridCows_v)
 
 # Select Bulls at population wide level
 HybridBulls <- selectInd(HybridRefPop[HybridRefPop@misc$gen >= Gen - 1], nInd = nBull_v*nVillages,
