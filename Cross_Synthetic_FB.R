@@ -6,6 +6,7 @@ cat("**** Starting with ", Strategy, " ****\n")
 
 # ---- Create objects to store farms and villages populations ----
 
+# Create objects to store populations at village level
 HybridOffsprings_v <- vector("list", nVillages)
 names(HybridOffsprings_v) <- paste0("Village", 1:nVillages)
 
@@ -46,7 +47,7 @@ for (v in 1:nVillages) {
     # Select hybrids cows and bulls at farm level
     HybridCows_f[[v]][[f]] <- HybridOffsprings_f[[v]][[f]][HybridOffsprings_f[[v]][[f]]@sex == "F"]
     HybridBulls_f[[v]][[f]] <- selectInd(HybridOffsprings_f[[v]][[f]], nInd = 1, sex = "M",
-                                         trait = selIndex, b = TraitIndex,use = "pheno")
+                                         trait = selIndex, b = TraitIndex, use = "pheno")
   }
 
   # Merge populations at Village level
@@ -59,7 +60,7 @@ for (v in 1:nVillages) {
 # Merge overall population
 HybridOffsprings <- mergePops(HybridOffsprings_v)
 HybridBulls <- mergePops(HybridBulls_v)
-HybridCows <- mergePops( HybridCows_v)
+HybridCows <- mergePops(HybridCows_v)
 
 # Calculate Inbreeding coeficient and heterosis
 InbredingCoef <- CompCoefInb(pop= HybridOffsprings)
@@ -114,10 +115,10 @@ for (Gen in 22:40) {
   Heterosis <- calcHeterosis(HybridCows, HybridBulls, HybridOffsprings)
   Heterosis_G <- calcHeterosis_G(HybridCows, HybridBulls, HybridOffsprings)
   HybridBulls <- mergePops(HybridBulls_v)
-  HybridCows <- mergePops( HybridCows_v)
+  HybridCows <- mergePops(HybridCows_v)
 
   # Calculate Inbreeding coefficient
-  InbredingCoef <- CompCoefInb(InbredingCoef , pop= HybridOffsprings)
+  InbredingCoef <- CompCoefInb(InbredingCoef, pop= HybridOffsprings)
 
   # Store the outputs
   for (i in Offs) {
