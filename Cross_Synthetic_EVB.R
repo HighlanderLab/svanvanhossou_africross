@@ -45,7 +45,7 @@ for (v in 1:nVillages) {
     HybridOffsprings_f[[v]][[f]]@misc <- list(gen = rep(Gen, times = nInd(HybridOffsprings_f[[v]][[f]])))
     HybridRefPop_f[[v]][[f]]<- HybridOffsprings_f[[v]][[f]]
 
-    ##select hybrid cows
+    # Select hybrid cows
     HybridCows_f[[v]][[f]] <- HybridOffsprings_f[[v]][[f]][HybridOffsprings_f[[v]][[f]]@sex == "F"]
   }
 
@@ -54,7 +54,7 @@ for (v in 1:nVillages) {
   HybridCows_v[[v]] <- mergePops(HybridCows_f[[v]])
   HybridRefPop_v [[v]] <- mergePops(HybridRefPop_f[[v]])
 
-  # select Bulls at Village level
+  # Select Bulls at Village level
   HybridBulls_v[[v]] <- selectInd(HybridOffsprings_v[[v]], nInd = nBull_v, trait = selIndex, b = TraitIndex,  use = "pheno", sex = "M")
 }
 
