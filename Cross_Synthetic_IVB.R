@@ -2,7 +2,7 @@
 # Synthetic "intra-village bull"
 Strategy <- "Synthetic_IVB"
 
-cat("*** Starting with ", Strategy, "***n")
+cat("*** Starting with", Strategy, "***n")
 
 # ---- Create objects to store farms and villages populations ----
 HybridOffsprings_v <- vector("list", nVillages)
@@ -59,7 +59,7 @@ for (v in 1:nVillages) {
 # Merge overall population
 HybridOffsprings <- mergePops(HybridOffsprings_v)
 HybridBulls <- mergePops(HybridBulls_v)
-HybridCows <- mergePops( HybridCows_v)
+HybridCows <- mergePops(HybridCows_v)
 
 # Calculate Inbreeding coeficient and heterosis
 InbredingCoef <- CompCoefInb(pop = HybridOffsprings)
@@ -75,7 +75,7 @@ write.table(Heterosis_G, file = paste0(cwd, "/Results/Heterosis_G", ".txt"),
 Offs <-c("HybridOffsprings", "HybridBulls", "HybridCows")
 
 for (i in Offs) {
-  SummaryAll <- recordSummary( pop = get(i), year = Gen)
+  SummaryAll <- recordSummary(pop = get(i), year = Gen)
   assign(paste0("Summary_", i), SummaryAll)
 }
 
@@ -92,7 +92,7 @@ for (Gen in 22:40) {
       cat("Working on Farm ", f, "in Village ", v, "\n")
       HybridOffsprings_f[[v]][[f]] <- randCross2(females = HybridCows_f[[v]][[f]], males = HybridBulls_v[[v]][Bindex[f]],
                                                  nCrosses = nInd(HybridCows_f[[v]][[f]]))
-      HybridOffsprings_f[[v]][[f]] <- setPheno( HybridOffsprings_f[[v]][[f]], h2 =  h2)
+      HybridOffsprings_f[[v]][[f]] <- setPheno(HybridOffsprings_f[[v]][[f]], h2 =  h2)
       HybridOffsprings_f[[v]][[f]]@misc <- list(gen = rep(Gen, times = nInd(HybridOffsprings_f[[v]][[f]])))
       HybridRefPop_f[[v]][[f]]<- c(HybridRefPop_f[[v]][[f]], HybridOffsprings_f[[v]][[f]])
 
@@ -109,7 +109,7 @@ for (Gen in 22:40) {
 
     # Select Bulls at Village level
     Candidates_v[[v]] <- HybridRefPop_v[[v]][HybridRefPop_v[[v]]@misc$gen >= Gen - 1]
-    HybridBulls_v[[v]] <- selectInd( Candidates_v[[v]], nBull_v, sex = "M",
+    HybridBulls_v[[v]] <- selectInd(Candidates_v[[v]], nBull_v, sex = "M",
                                       trait = selIndex, b = TraitIndex, use = "pheno")
   }
 
@@ -118,7 +118,7 @@ for (Gen in 22:40) {
   Heterosis <- calcHeterosis(HybridCows, HybridBulls, HybridOffsprings)
   Heterosis_G <- calcHeterosis_G(HybridCows, HybridBulls, HybridOffsprings)
   HybridBulls <- mergePops(HybridBulls_v)
-  HybridCows <- mergePops( HybridCows_v)
+  HybridCows <- mergePops(HybridCows_v)
 
   # Calculate Inbreeding coeficient
   InbredingCoef <- CompCoefInb(InbredingCoef, pop = HybridOffsprings)
