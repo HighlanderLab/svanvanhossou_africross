@@ -101,7 +101,7 @@ local and exotic breeds separately to generate trait-specific linkage-disequilib
 in each breed.
 
 We assumed 
-- phenotypic selection targeting (lower) tick count incidence for the local breed
+- phenotypic selection targeting (lower) tick count for the local breed
 - genomic selection targeting (higher) body weight for the exotic breed.
 
 The Fst value between the two breeds at generation 20 is approximately equal to
