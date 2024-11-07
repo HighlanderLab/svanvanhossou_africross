@@ -87,7 +87,7 @@ LocalCowsNucleus <- selectInd(Candidates, nInd = 2000, sex = "F",
 
 ExoticNucleus = randCross2(females = ExoticCows_Nucleus, males = ExoticBulls_Nucleus, nCrosses = 2000)
 ExoticNucleus <- setPheno(ExoticNucleus, h2 = h2)
-ExoticNucleus <- list(gen = rep(Gen, times = nInd(ExoticNucleus)))
+ExoticNucleus@misc  <- list(gen = rep(Gen, times = nInd(ExoticNucleus)))
 ExoticNucleusRefPop <- c(RefExoticPop, ExoticNucleus)
 Candidates <- ExoticNucleusRefPop[ExoticNucleusRefPop@misc$gen >= Gen - 4]
 
