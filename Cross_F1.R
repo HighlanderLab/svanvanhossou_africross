@@ -161,7 +161,7 @@ for (Gen in 22:40) {
       LocalOffsprings_f[[v]][[f]] <- randCross2(females = LocalCows_f[[v]][[f]], males = LocalBulls_v[[v]][Bindex[f]],
                                                 nCrosses = nInd(LocalCows_f[[v]][[f]]))
       LocalOffsprings_f[[v]][[f]] <- setPheno(LocalOffsprings_f[[v]][[f]], h2 = h2)
-      LocalOffsprings_f[[v]][[f]]@mis <- list(gen = rep(Gen, times = nInd(LocalOffsprings_f[[v]][[f]])))
+      LocalOffsprings_f[[v]][[f]]@misc <- list(gen = rep(Gen, times = nInd(LocalOffsprings_f[[v]][[f]])))
 
       # Select Local cows at farm level
       LocalRefPop_f[[v]][[f]]<- c(LocalRefPop_f[[v]][[f]], LocalOffsprings_f[[v]][[f]])
@@ -249,4 +249,4 @@ write.table(InbredingCoef, file = paste0(cwd, "/Results/InbredingCoefs", ".txt")
             append = TRUE, row.names = FALSE, col.names = FALSE)
 
  # Clear environment
-keep(list = InitObjects sure = TRUE)
+keep(list = InitObjects, sure = TRUE)
