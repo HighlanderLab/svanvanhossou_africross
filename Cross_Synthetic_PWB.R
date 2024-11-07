@@ -93,7 +93,7 @@ for (Gen in 22:40) {
       cat("Working on Farm ", f, " in Village ", v, "\n")
       HybridOffsprings_f[[v]][[f]] <- randCross2(females = HybridCows_f[[v]][[f]], males = HybridBulls_v[[v]][Bindex[f]],
                                                  nCrosses = nInd(HybridCows_f[[v]][[f]]))
-      HybridOffsprings_f[[v]][[f]] <- setPheno= FALSE HybridOffsprings_f[[v]][[f]], h2 =  h2)
+      HybridOffsprings_f[[v]][[f]] <- setPheno(HybridOffsprings_f[[v]][[f]], h2 =  h2)
       HybridOffsprings_f[[v]][[f]]@misc <- list(gen = rep(Gen, times = nInd(HybridOffsprings_f[[v]][[f]])))
       HybridRefPop_f[[v]][[f]]<- c(HybridRefPop_f[[v]][[f]], HybridOffsprings_f[[v]][[f]])
 
@@ -112,7 +112,7 @@ for (Gen in 22:40) {
 # Merge overall population
 HybridOffsprings <- mergePops(HybridOffsprings_v)
 Heterosis <- calcHeterosis(HybridCows, HybridBulls, HybridOffsprings)
-Heterosis_G <- calcHeterossis_G(HybridCows, HybridBulls, HybridOffsprings)
+Heterosis_G <- calcHeterosis_G(HybridCows, HybridBulls, HybridOffsprings)
 HybridRefPop <- mergePops(HybridRefPop_v)
 HybridCows <- mergePops(HybridCows_v)
 
