@@ -77,6 +77,7 @@ print(diag(varD(LocalFounders)/varP(LocalFounders)))
 print(diag(varD(LocalFounders)/varP(LocalFounders)))
 
 # Systematically assign sexes to individuals
+SP$resetPed()
 SP$setSexes("yes_sys")
 
 # ---- Evaluate genetic distance between local and exotic founders ----
