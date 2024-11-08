@@ -45,6 +45,9 @@ repeat {
                 name = c("BodyWeight_local", "TickCount_local",
                          "BodyWeight_exotic", "TickCount_exotic"))
 
+  # Systematically assign sexes to individuals
+  SP$setSexes("yes_sys")
+  
   # Generate initial founder population
   Founders <- newPop(FounderGenomes)
   Founders@misc <- list(gen = rep(0, times = nInd(Founders)))
@@ -75,10 +78,6 @@ repeat {
 cat("Ratio of dominance variance to phenotypic variance\n")
 print(diag(varD(LocalFounders)/varP(LocalFounders)))
 print(diag(varD(LocalFounders)/varP(LocalFounders)))
-
-# Systematically assign sexes to individuals
-SP$resetPed()
-SP$setSexes("yes_sys")
 
 # ---- Evaluate genetic distance between local and exotic founders ----
 
