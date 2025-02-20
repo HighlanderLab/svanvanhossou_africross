@@ -9,7 +9,8 @@ the study are available in:
 
     Sèyi Fridaius Ulrich Vanvanhossou, Tong Yin, Gregor Gorjanc, Sven König
     Evaluation of crossbreeding strategies for improved adaptation and productivity in African smallholder cattle farms.
-    Under review in Genetics Selection Evolution.
+    Genetics Selection Evolution
+    https://gsejournal.biomedcentral.com/articles/10.1186/s12711-025-00952-8
 
 You need AlphaSimR version 1.6.0 or higher to run the scripts.
 
